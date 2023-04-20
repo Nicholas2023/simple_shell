@@ -16,11 +16,11 @@ int _putchar(char x);
 char *_strcpy(char *nick, char *anna);
 char *_strdup(char *anna);
 char *_strcat(char *nick, char *anna);
-void p_env(char **anna);
+void printenvi(char **anna);
 char **_token(char *anna);
 int _path(char **nick, char **anna);
 void _getenv(char *nick, char **anna);
-char *_cat(char *nick, char *anna, char **ven);
+char *cat(char *nick, char *anna, char **ven);
 void s_exit(char *anna);
 void _execve(char **nick, char *anna);
 
