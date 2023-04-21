@@ -14,25 +14,21 @@ int main(int ac, char **av, char **env)
 {
 	char *input_buffer = NULL, **command = NULL;
 	ssize_t buffer_size = 0, read_char = 0;
-	int status = 0, i = 0, tally;
+	int status = 0, i = 0, tally = 0;
+
 	(void) ac, (void) av;/*Silence warnings about unused parameters*/
 
-	if (isatty(STDIN_FILENO))
-		write(STDOUT_FILENO, "$ ", 2);/*print shell prompt*/
-	while ((read_char = getline(&input_buffer, &buffer_size, stdin)))
-	{	/*Read user input*/
-		i = 0;
+	while (1)
+	{
+		if (isatty(STDIN_FILENO))
+			write(STDOUT_FILENO, "$ ", 2);/*print shell prompt*/
+		((read_char = getline(&input_buffer, &buffer_size, stdin)))
 		if (read_char == EOF)/*Exit if the user input is reached*/
-		{
-			write(STDOUT_FILENO, "\n", 1);
-			free(input_buffer);
 			break;
-		}
-		if (_strcmp(buffer, "\n") == 0 || _strcmp(input_buffer, "\t") == 0)
-		{
-			write(STDOUT_FILENO, "$ ", 2);/*skip empty input*/
+		if (_strcmp(input_buffer, "\n") == 0)
+			continue;/* skip empty input */
+		if (_strcmp(input_buffer, "\t") == 0)
 			continue;
-		}
 		for (; input_buffer[i] != '\0'; i++)/*Remove newline*/
 		{
 			if (input_buffer[i] == '\n')
@@ -46,10 +42,7 @@ int main(int ac, char **av, char **env)
 		status = _path(command, env);/*Find command path*/
 		if (status == 1)
 			_execve(command, input_buffer);/*Execute command if found*/
-		free(command), free(input_buffer), input_buffer = NULL;
-		tally++;
-		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, "$ ", 2);/*Print prompt*/
+		free(command), free(input_buffer), input_buffer = NULL, tally++;
 	}
 	return (0);
 }

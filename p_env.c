@@ -14,13 +14,17 @@ void p_env(char **anna)
 
 	while (anna[n])
 	{
+		/*determine the length of the enviroment varriable*/
 		length = _strlen(anna[n]);
+		/*write the cuurent enviroment standard output*/
 		write(STDOUT_FILENO, anna[n], length);
+		/*add a new line*/
 		_putchar('\n');
+		/* move to the next enviroment*/
 		n++;
 	}
 }
-	
+
 /**
  * _getenv - gets env
  * @nick: a pointer that print the env
@@ -31,8 +35,10 @@ void p_env(char **anna)
 
 void _getenv(char *nick, char **env)
 {
+	/* checks if the input is equal to the string "env"*/
 	if (_strcmp(nick, "env") == 0)
 	{
+		/*if they are equall call the p_env function to print enviroment variable*/
 		p_env(env);
 	}
 }
