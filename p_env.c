@@ -14,9 +14,9 @@ void p_env(char **anna)
 
 	while (anna[n])
 	{
-		/*determine the length of the enviroment varriable*/
+		/*determine the length of the enviroment variable*/
 		length = _strlen(anna[n]);
-		/*write the cuurent enviroment standard output*/
+		/*write the current enviroment standard output*/
 		write(STDOUT_FILENO, anna[n], length);
 		/*add a new line*/
 		_putchar('\n');
@@ -42,4 +42,3 @@ void _getenv(char *nick, char **env)
 		p_env(env);
 	}
 }
-
