@@ -9,6 +9,9 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <errno.h>
 
 int _strcmp(char *nick, char *anna);
 int _strlen(char *anna);
@@ -23,5 +26,7 @@ void _getenv(char *nick, char **env);
 char *cat(char *nick, char *anna, char **ven);
 void s_exit(char *anna);
 void _execve(char **nick, char *anna);
+ssize_t _getline(char **p_line, size_t *n, FILE *stream);
+
 
 #endif /*ALX_H*/
