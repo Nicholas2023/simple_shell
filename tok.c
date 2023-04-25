@@ -24,14 +24,14 @@ char **_token(const char *str)
 
 	num_tokens = count_tokens(strcopy, TOKEN_DELIM);
 
-	holder = malloc(num_tokens + 1, sizeof(char *));
+	holder = _realloc(num_tokens + 1, sizeof(char *));
 	if (holder == NULL)
 	{
 		free(strcopy);
 		return (NULL);
 	}
 
-	char *token = strtok(strcopy, TOKEN_DELIM);
+	char *token = _strtok(strcopy, TOKEN_DELIM);
 	size_t i = 0;
 
 	while (token != NULL)
@@ -44,7 +44,7 @@ char **_token(const char *str)
 			return (NULL);
 		}
 		i++;
-		token = strtok(NULL, TOKEN_DELIM);
+		token = _strtok(NULL, TOKEN_DELIM);
 	}
 
 	free(strcopy);
@@ -63,12 +63,12 @@ size_t count_tokens(char *str, const char *delim)
 	char *token;
 	size_t count = 0;
 
-	token = strtok(str, delim);
+	token = _strtok(str, delim);
 
 	while (token != NULL)
 	{
 		count++;
-		token = strtok(NULL, delim);
+		token = _strtok(NULL, delim);
 	}
 
 	return (count);
