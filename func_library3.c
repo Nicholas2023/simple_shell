@@ -1,5 +1,9 @@
 #include "alx.h"
 
+void *_realloc(void *ptr, unsigned int o_size, unsigned int n_size);
+void _lineptr(char **p_line, size_t *n, char *buffer, size_t b);
+ssize_t _getline(char **p_line, size_t *n, FILE *stream);
+
 
 /**
  * _realloc - Reallocate a memory block using malloc and free
