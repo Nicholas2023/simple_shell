@@ -1,8 +1,5 @@
 #include "alx.h"
 
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-void assign_lineptr(char **lineptr, size_t *n, char *buffer, size_t b);
-ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 
 /**
  * _realloc - Reallocate a memory block using malloc and free
@@ -110,11 +107,9 @@ ssize_t _getline(char **p_line, size_t *n, FILE *stream)
 	else
 		return (-1);
 	inp = 0;
-
 	buffer = malloc(sizeof(char) * 120);
 	if (!buffer)
 		return (-1);
-
 	while (c != '\n')
 	{
 		r = read(STDIN_FILENO, &c, 1);
@@ -136,9 +131,7 @@ ssize_t _getline(char **p_line, size_t *n, FILE *stream)
 		inp++;
 	}
 	buffer[inp] = '\0';
-
 	_lineptr(p_line, n, buffer, inp);
-
 	ret = inp;
 	if (r != 0)
 		inp = 0;
