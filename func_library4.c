@@ -3,7 +3,7 @@
 
 int toklen(char *str, char *dlm);
 int num_tokens(char *str, char *dlm);
-char **_strtok(char *input, char *dlm);
+char *_strtok(char *input, char *dlm);
 
 /**
  * toklen - Finds the last delimeter index
@@ -63,9 +63,9 @@ int num_tokens(char *str, char *dlm)
  * Return: A ponter to an array of tokens
  */
 
-char **_strtok(char *input, char *dlm)
+char *_strtok(char *input, char *dlm)
 {
-	char **str;
+	char *str;
 	int index = 0, tokens, t, letters, l;
 
 	tokens = num_tokens(input, dlm);
