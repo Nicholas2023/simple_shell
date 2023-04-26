@@ -1,6 +1,5 @@
 #include "alx.h"
 
-
 char **_token(char *str);
 size_t count_tokens(char *str, char *delim);
 void free_tokens(char **tokens);
@@ -18,8 +17,8 @@ void free_tokens(char **tokens);
 char **_token(char *str)
 {
 	char **holder = NULL;
-	char *str_copy = NULL;
-	size_t num_tokens = 0;
+	char *str_copy = NULL, *token;
+	size_t num_tokens = 0, i = 0;
 
 	if (str == NULL)
 		return (NULL);
@@ -37,8 +36,7 @@ char **_token(char *str)
 		return (NULL);
 	}
 
-	char *token = strtok(str_copy, TOKEN_DELIM);
-	size_t i = 0;
+	token = strtok(str_copy, TOKEN_DELIM);
 
 	while (token != NULL)
 	{
