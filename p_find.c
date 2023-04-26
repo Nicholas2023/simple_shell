@@ -23,15 +23,15 @@ int _path(char **nick, char **env)
 			for (j = 0; token; j++)
 			{
 				len1 = _strlen(token);
-				len2 = _strlen(command[0]);
+				len2 = _strlen(nick[0]);
 				path = malloc(sizeof(char) * (len1 + len2 + 2));
 				path[0] = '\0';
-				path = cat(path, token, command);
+				path = cat(path, token, nick);
 				if (access(path, X_OK) == 0)
 				{
 					if (fork() == 0)
 					{
-						execve(path, command, NULL);
+						execve(path, nick, NULL);
 						free(path);
 					}
 					else
