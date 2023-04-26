@@ -1,10 +1,12 @@
 #include "alx.h"
 
-#define TOKEN_DELIM " \t\r\n\a,;|&:"
 
 char **_token(char *str);
 size_t count_tokens(char *str, char *delim);
 void free_tokens(char **tokens);
+
+
+#define TOKEN_DELIM " \t\r\n\a,;|&:"
 
 /**
  * _token - Parse the arguments passed by the user
@@ -16,26 +18,26 @@ void free_tokens(char **tokens);
 char **_token(char *str)
 {
 	char **holder = NULL;
-	char *strcopy = NULL;
+	char *str_copy = NULL;
 	size_t num_tokens = 0;
 
 	if (str == NULL)
 		return (NULL);
 
-	strcopy = _strdup(str);
-	if (strcopy == NULL)
+	str_copy = _strdup(str);
+	if (str_copy == NULL)
 		return (NULL);
 
-	num_tokens = count_tokens(strcopy, TOKEN_DELIM);
+	num_tokens = count_tokens(str_copy, TOKEN_DELIM);
 
-	holder = malloc(num_tokens + 1, sizeof(char *));
+	holder = malloc((num_tokens + 1) * sizeof(char *));
 	if (holder == NULL)
 	{
-		free(strcopy);
+		free(str_copy);
 		return (NULL);
 	}
 
-	char *token = strtok(strcopy, TOKEN_DELIM);
+	char *token = strtok(str_copy, TOKEN_DELIM);
 	size_t i = 0;
 
 	while (token != NULL)
@@ -44,14 +46,14 @@ char **_token(char *str)
 		if (holder[i] == NULL)
 		{
 			free_tokens(holder);
-			free(strcopy);
+			free(str_copy);
 			return (NULL);
 		}
 		i++;
 		token = strtok(NULL, TOKEN_DELIM);
 	}
 
-	free(strcopy);
+	free(str_copy);
 	return (holder);
 }
 
@@ -85,10 +87,12 @@ size_t count_tokens(char *str, char *delim)
 
 void free_tokens(char **tokens)
 {
-	if (tokens == NULL)
-		(return);
+	size_t i;
 
-	for (size_t i = 0; tokens[i] != NULL; i++)
+	if (tokens == NULL)
+		return;
+
+	for (i = 0; tokens[i] != NULL; i++)
 	{
 		free(tokens[i]);
 	}
