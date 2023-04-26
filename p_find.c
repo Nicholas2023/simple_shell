@@ -14,12 +14,12 @@ int _path(char **nick, char **env)
 	for (n = 0; env[n]; n++)
 	{
 		envdup = _strdup(env[n]);
-		left = _strtok(envdup, "=");
-		right = _strtok(NULL, "=");
+		left = strtok(envdup, "=");
+		right = strtok(NULL, "=");
 		if (_strcmp(left, "PATH") == 0)
 		{
 			bins = right;
-			token = _strtok(bins, ": \t");
+			token = strtok(bins, ": \t");
 			for (j = 0; token; j++)
 			{
 				len1 = _strlen(token);
@@ -40,7 +40,7 @@ int _path(char **nick, char **env)
 					free(envdup);
 					return (0);
 				}
-				token = _strtok(NULL, ": \t");
+				token = strtok(NULL, ": \t");
 				free(path);
 			}
 		}
