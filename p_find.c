@@ -6,7 +6,7 @@
  * @anna: the enviroment to find path
  * Return: status of 1 or 0
  */
-int _path(char **nick, char **anna)
+int _path(char **nick, char **env)
 {
 	char *left = NULL, *right = NULL, *path = NULL, *bins, *envdup, *token;
 	size_t n, j, len1 = 0, len2 = 0;
