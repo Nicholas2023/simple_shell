@@ -3,7 +3,7 @@
 /**
  * _path - get the path of the command
  * @nick: the input of the user
- * @anna: the enviroment to find path
+ * @env: the enviroment to find path
  * Return: status of 1 or 0
  */
 int _path(char **nick, char **env)
