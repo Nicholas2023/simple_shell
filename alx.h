@@ -21,7 +21,7 @@ char *_strdup(char *anna);
 char *_strcat(char *nick, char *anna);
 void p_env(char **anna);
 char **_token(const char *str);
-int _path(char **nick, char **anna);
+int _path(char **nick, char **env);
 void _getenv(char *nick, char **env);
 char *cat(char *nick, char *anna, char **ven);
 void s_exit(char *anna);
