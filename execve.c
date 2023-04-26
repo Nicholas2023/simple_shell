@@ -29,7 +29,7 @@ void _execve(char **nick, char *anna)
 		/*Check for failure in the execve()*/
 		if (execve(nick[0], nick, NULL) == -1)
 		{
-			perror("Error: failed to execute command")
+			perror("Error: failed to execute command");
 				exit(EXIT_FAILURE);
 		}
 	}
