@@ -9,7 +9,7 @@
  * Return: tokens of the strings
  */
 
-char **_token(const char *str)
+char **_token(char *str)
 {
 	char **holder = NULL;
 	char *strcopy = NULL;
@@ -58,7 +58,7 @@ char **_token(const char *str)
  * Return: The number of tokens
  */
 
-size_t count_tokens(char *str, const char *delim)
+size_t count_tokens(char *str, char *delim)
 {
 	char *token;
 	size_t count = 0;
