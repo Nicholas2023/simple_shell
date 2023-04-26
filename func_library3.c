@@ -1,8 +1,8 @@
 #include "alx.h"
 
 void *_realloc(void *ptr, unsigned int o_size, unsigned int n_size);
-void _lineptr(char **p_line, size_t *n, char *buffer, size_t b);
-ssize_t _getline(char **p_line, size_t *n, FILE *stream);
+void _lineptr(char **p_line, ssize_t *n, char *buffer, ssize_t b);
+ssize_t _getline(char **p_line, ssize_t *n, FILE *stream);
 
 
 /**
@@ -64,7 +64,7 @@ void *_realloc(void *ptr, unsigned int o_size, unsigned int n_size)
  * @b: The size of buffer
  */
 
-void _lineptr(char **p_line, size_t *n, char *buffer, size_t b)
+void _lineptr(char **p_line, ssize_t *n, char *buffer, ssize_t b)
 {
 	if (*p_line == NULL)
 	{
@@ -99,7 +99,7 @@ void _lineptr(char **p_line, size_t *n, char *buffer, size_t b)
  * Return: The number of bytes read from user input
  */
 
-ssize_t _getline(char **p_line, size_t *n, FILE *stream)
+ssize_t _getline(char **p_line, ssize_t *n, FILE *stream)
 {
 	static ssize_t inp;
 	ssize_t ret;
