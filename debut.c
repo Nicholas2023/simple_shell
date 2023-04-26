@@ -22,7 +22,7 @@ int main(int ac, char **av, char **env)
 	{
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "$ ", 2);/*print shell prompt*/
-		((read_char = _getline(&input_buffer, &buffer_size, stdin)))
+		read_char = _getline(&input_buffer, &buffer_size, stdin);
 		if (read_char == EOF)/*Exit if the user input is reached*/
 			break;
 		if (_strcmp(input_buffer, "\n") == 0)
