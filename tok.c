@@ -2,6 +2,10 @@
 
 #define TOKEN_DELIM " \t\r\n\a,;|&:"
 
+char **_token(char *str);
+size_t count_tokens(char *str, char *delim);
+void free_tokens(char **tokens);
+
 /**
  * _token - Parse the arguments passed by the user
  * @str: A pointer to the argument passed by the user
