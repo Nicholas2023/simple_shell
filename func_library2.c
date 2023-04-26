@@ -46,7 +46,7 @@ char *cat(char *nick, char *anna, char **ven)
  *
  * Return: pointer to the duplicated string
  */
-char *_strdup(const char *str)
+char *_strdup(char *str)
 {
 	int length = 0;
 	char *ret;
