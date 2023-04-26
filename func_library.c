@@ -97,5 +97,5 @@ char *_strdup(char *anna)
 		return (NULL);
 	for (len++; len--;)
 		ptr[len] = *--anna;
-	return (ret);
+	return (ptr);
 }
