@@ -31,5 +31,3 @@ void _env(char *str, char **env)
 		printenvi(env);
 	}
 }
-Footer
-© 2023 GitHub, Inc.

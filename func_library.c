@@ -85,3 +85,15 @@ char *_strdup(char *anna)
 		ptr[len] = *--anna;
 	return (ptr);
 }
+
+/**
+ * _putchar - Writes character c to stdout
+ * @c: character to be printed
+ *
+ * Return: 1 if success and 0 if otherwise
+ */
+
+int _putchar(char c)
+{
+	return (write(1, &c, 1));
+}
