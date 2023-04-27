@@ -1,48 +1,48 @@
 #include "alx.h"
 
 /**
- * main - The entry point of the program
- * @ac: the number of arguments passed to the program
- * @av: arguments passed to the program
- * @env: an array of strings that contains the enviroment variables
- *
- * Return:0 for succesfull execution of the program
+ * main - Program that is simple UNIX command interpreter
+ * @argc: argument count
+ * @argv: argument vector
+ * @env: the environment
+ * Return: 0
  */
-
-
-int main(int ac, char **av, char **env)
+int main(int argc, char **argv, char **env)
 {
-	char *input_buffer = NULL, **command = NULL;
-	ssize_t buffer_size = 0, read_char = 0;
-	int status = 0, i = 0, tally = 0;
+	char *prompt = "##--->";
+	char *line = NULL;
+	char **args = NULL;
+	int i = 0, status = 0, arg_num = 0;
+	static int exit_stat, tally;
+	size_t len = 0;
+	ssize_t read = 0;
+	(void)argc, (void)**argv;
 
-	(void) ac, (void) av;/*Silence warnings about unused parameters*/
-
-	while (1)
+	while (TRUE)
 	{
-		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, "$ ", 2);/*print shell prompt*/
-		read_char = _getline(&input_buffer, &buffer_size, stdin);
-		if (read_char == EOF)/*Exit if the user input is reached*/
-			break;
-		if (_strcmp(input_buffer, "\n") == 0)
-			continue;/* skip empty input */
-		if (_strcmp(input_buffer, "\t") == 0)
+		if (isatty(STDIN_FILENO) == 1)
+			write(STDOUT_FILENO, prompt, 6);
+
+		read = getline(&line, &len, stdin);
+		++tally;
+		if (special_char(line, read, &exit_stat) == 127)
 			continue;
-		for (; input_buffer[i] != '\0'; i++)/*Remove newline*/
-		{
-			if (input_buffer[i] == '\n')
-				input_buffer[i] = '\0';
-		}
-		_getenv(input_buffer, env);/*Exit status in casee of "$?"*/
-		s_exit(input_buffer);/*Use exit command*/
-		command = _token(input_buffer);/*Tokenize buffer*/
-		if (command  == NULL)
-			continue;
-		status = _path(command, env);/*Find command path*/
-		if (status == 1)
-			_execve(command, input_buffer);/*Execute command if found*/
-		free(command), free(input_buffer), input_buffer = NULL, tally++;
+
+		no_nl(line);
+
+		args = parser(line);
+
+		for (i = 0; args[i]; i++)
+			arg_num++;
+
+		builtins(line, args, env, &exit_stat);
+
+		status = _path(args[0], args, env, &exit_stat);
+
+		_execute(status, args, &exit_stat, &tally);
+
+		fflush(stdin);
 	}
+	free(line);
 	return (0);
 }
