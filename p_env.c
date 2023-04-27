@@ -2,8 +2,8 @@
 
 /**
  * execute - Executes programs
- * command: User input
- * buffer: A copy of user's command
+ * @command: User input
+ * @buffer: A copy of user's command
  */
 
 void execute(char **command, char *buffer)
