@@ -1,49 +1,50 @@
-#include "alx.h"
-
+#include "holberton.h"
 /**
- * _path - function that prints environment PATH
- * @env: environment
- * @first: the first tokenized keyword (user inputted argument)
- * @input: the tokenized arguments
- * @ex_st: the exit status
- * Return: 0 if successful
+ *findpath -  gets the complete full PATH of the commands
+ *@command: is the input by the user
+ *@env: is the environment to find path
+ *Return: status of 1 or 0
  */
-int _path(char *first, char **input, char **env, int *ex_st)
+int findpath(char **command, char **env)
 {
-	int i;
-	char *temp, *left, *right;
-	char *new = NULL, *envcopy = NULL;
+	char *left = NULL, *right = NULL, *bins, *token, *envdup, *path = NULL;
+	size_t i, j, len1 = 0, len2 = 0;
 
-	for (i = 0; env[i][0] != '\0'; i++)
+	for (i = 0; env[i]; i++)
 	{
-		envcopy = _strdup(env[i]);
-		left = strtok(envcopy, "= \t");
-		temp = strtok(NULL, "= \t");
-
+		envdup = _strdup(env[i]);
+		left = strtok(envdup, "=");
+		right = strtok(NULL, "=");
 		if (_strcmp(left, "PATH") == 0)
 		{
-			right = strtok(temp, ": \t");
-			while (right)
+			bins = right;
+			token = strtok(bins, ": \t");
+			for (j = 0; token; j++)
 			{
-				new = pathstr(right, first);
-
-				if (access(new, X_OK) == 0)
+				len1 = _strlen(token);
+				len2 = _strlen(command[0]);
+				path = malloc(sizeof(char) * (len1 + len2 + 2));
+				path[0] = '\0';
+				path = cat(path, token, command);
+				if (access(path, X_OK) == 0)
 				{
 					if (fork() == 0)
-						execve(new, input, NULL);
-
+					{
+						execve(path, command, NULL);
+						free(path);
+					}
 					else
 						wait(NULL);
-					*ex_st = 0;
-					free(new);
-					free(envcopy);
+					free(path);
+					free(envdup);
 					return (0);
 				}
-				right = strtok(NULL, ": \t");
-				free(new);
+				token = strtok(NULL, ": \t");
+				free(path);
 			}
 		}
-		free(envcopy);
+		free(envdup);
 	}
-	return (2);
+	return (1);
 }
+
