@@ -1,44 +1,21 @@
 #include "alx.h"
 
 /**
- * p_env - print the enviroment
- * @anna: a pointer to the enviroment
- *
- * Return: void
+ * printenv - prints the environment variable
+ * @env: the environment variable to print
+ * @ex_st: exit status
+ * Return: Always (0) for sucess
  */
-
-void p_env(char **anna)
+int printenv(char **env, int *ex_st)
 {
-	size_t  n = 0;
-	size_t length;
+	unsigned int i = 0;
 
-	while (anna[n])
+	while (env[i] != NULL)
 	{
-		/*determine the length of the enviroment variable*/
-		length = _strlen(anna[n]);
-		/*write the current enviroment standard output*/
-		write(STDOUT_FILENO, anna[n], length);
-		/*add a new line*/
+		print_str(env[i]);
 		_putchar('\n');
-		/* move to the next enviroment*/
-		n++;
+		i++;
 	}
-}
-
-/**
- * _getenv - gets env
- * @nick: a pointer that print the env
- * @env: gets env
- *
- * Return: void
- */
-
-void _getenv(char *nick, char **env)
-{
-	/* checks if the input is equal to the string "env"*/
-	if (_strcmp(nick, "env") == 0)
-	{
-		/*if they are equall call the p_env function to print enviroment variable*/
-		p_env(env);
-	}
+	*ex_st = 0;
+	return (EXIT_SUCCESS);
 }
