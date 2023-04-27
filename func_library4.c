@@ -1,107 +1,85 @@
 #include "alx.h"
 
-
-int toklen(char *str, char *dlm);
-int num_tokens(char *str, char *dlm);
-char **_strtok(char *input, char *dlm);
-
 /**
- * toklen - Finds the last delimeter index
- * @str: The string to be measured
- * @dlm: The delimeter
- *
- * Return: The last delimeter index of a str
+ * free_grid - function that frees a 2 dimensional grid of int pointers
+ * @grid: Char double pointer to be freed
+ * @height: int for height of 2D array to be passed
+ * Return: void
  */
 
-int toklen(char *str, char *dlm)
+void free_grid(char **grid, int height)
 {
-	int i = 0, length = 0;
+	int k;
 
-	while (*(str + i) && *(str + i) != *dlm)
+	for (k = 0; k < height; k++)
+		free(grid[k]);
+
+	free(grid);
+}
+
+
+/**
+ * no_nl - removes the new line with the NULL character
+ * @l: the line
+ * Return: nothing
+ */
+void no_nl(char *l)
+{
+
+	int i = 0;
+
+	while (l[i])
 	{
-		length++;
+		if (l[i] == '\n')
+		{
+			l[i] = '\0';
+			return;
+		}
+
 		i++;
 	}
-
-	return (length);
 }
 
 
 /**
- * num_tokens - Counts number of tokens in a string
- * @str: The string to be split
- * @dlm: A pointer to delimeters
- *
- * Return: The number of tokens in searched string
+ * special_char - if the user types control d, it exits the shell and handles
+ * the error when the user keeps on tabbing, it carries out the command
+ * @bytes: the number of bytes read in from the user input
+ * @buffer: the buffer
+ * @ex_st: the exit status
+ * Return: Always (0) for succcess
  */
-
-int num_tokens(char *str, char *dlm)
+int  special_char(char *buffer, ssize_t bytes, int *ex_st)
 {
-	int i, tok = 0, len = 0;
+	int i = 0;
 
-	for (i = 0; *(str + i); i++)
-		len++;
-
-	for (i = 0; i < len; i++)
+	if (bytes == EOF && isatty(STDIN_FILENO) == 1)
 	{
-		if (*(str + i) != *dlm)
-		{
-			tok++;
-			i += toklen(str + i, dlm);
-		}
+		_putchar('\n');
+		free(buffer);
+		exit(*ex_st);
 	}
-	return (tok);
-}
 
-
-
-/**
- * _strtok - A function that tokenizes a string
- * @input: A pointer to the string to be parsed
- * @dlm: The delimeter characters used to tokenize the string
- *
- * Return: A ponter to an array of tokens
- */
-
-char **_strtok(char *input, char *dlm)
-{
-	char **str;
-	int index = 0, tokens, t, letters, l;
-
-	tokens = num_tokens(input, dlm);
-	if (tokens == 0)
-		return (NULL);
-
-	str = malloc(sizeof(char *) * (tokens + 2));
-	if (!str)
-		return (NULL);
-
-	for (t = 0; t < tokens; t++)
+	if (bytes == EOF && isatty(STDIN_FILENO) == 0)
 	{
-		while (input[index] == *dlm)
-			index++;
-
-		letters = toklen(input + index, dlm);
-
-		str[t] = malloc(sizeof(char) * (letters + 1));
-		if (!str[t])
-		{
-			for (index -= 1; index >= 0; index--)
-				free(str[index]);
-			free(str);
-			return (NULL);
-		}
-
-		for (l = 0; l < letters; l++)
-		{
-			str[t][l] = input[index];
-			index++;
-		}
-
-		str[t][l] = '\0';
+		free(buffer);
+		exit(*ex_st);
 	}
-	str[t] = NULL;
-	str[t + 1] = NULL;
 
-	return (str);
+	if (_strcmp(buffer, "\n") == 0)
+	{
+		*ex_st = 0;
+		return (127);
+	}
+
+	while (buffer[i] != '\n')
+	{
+		if (buffer[i] != ' ' && buffer[i] != '\t')
+			return (0);
+
+		++i;
+	}
+
+	*ex_st = 0;
+	return (127);
 }

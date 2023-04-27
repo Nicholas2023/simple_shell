@@ -1,4 +1,4 @@
-#include "holberton.h"
+#include "alx.h"
 
 /**
  * _path - function that prints environment PATH
