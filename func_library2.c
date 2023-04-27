@@ -1,42 +1,70 @@
-#include "alx.h"
-
+#include "slx.h"
 
 /**
- * _strcat - Concatenates two strings
- * @nick: A pointer to the source string
- * @anna: A pointer to the destination string
- *
- * Return: A pointer to the concatenated string
+ * _print - writes a array of chars in the standar output
+ * @string: pointer to the array of chars
+ * Return: the number of bytes writed or .
+ * On error, -1 is returned, and errno is set appropriately.
  */
-
-char *_strcat(char *nick, char *anna)
+int _print(char *string)
 {
-	int i = 0;
-	int d_len = 0;
-
-	while (nick[i++])
-		d_len++;
-	for (i = 0; anna[i]; i++)
-		nick[d_len++] = anna[i];
-	return (nick);
+	return (write(STDOUT_FILENO, string, str_length(string)));
+}
+/**
+ * _printe - writes a array of chars in the standar error
+ * @string: pointer to the array of chars
+ * Return: the number of bytes writed or .
+ * On error, -1 is returned, and errno is set appropriately.
+ */
+int _printe(char *string)
+{
+	return (write(STDERR_FILENO, string, str_length(string)));
 }
 
 /**
- * cat - concatenate a string for path
- * @nick: A pointer to the buffer
- * @anna: The bin to append commands
- * @ven: Command to append to bin
- *
- * Return: Concatenated string
+ * _print_error - writes a array of chars in the standart error
+ * @data: a pointer to the program's data'
+ * @errorcode: error code to print
+ * Return: the number of bytes writed or .
+ * On error, -1 is returned, and errno is set appropriately.
  */
-
-char *cat(char *nick, char *anna, char **ven)
+int _print_error(int errorcode, data_of_program *data)
 {
-	_strcat(nick, anna);
-	_strcat(nick, "/");
-	_strcat(nick, *ven);
-	_strcat(nick, "\0");
+	char n_as_string[10] = {'\0'};
 
-	return (nick);
+	long_to_string((long) data->exec_counter, n_as_string, 10);
+
+	if (errorcode == 2 || errorcode == 3)
+	{
+		_printe(data->program_name);
+		_printe(": ");
+		_printe(n_as_string);
+		_printe(": ");
+		_printe(data->tokens[0]);
+		if (errorcode == 2)
+			_printe(": Illegal number: ");
+		else
+			_printe(": can't cd to ");
+		_printe(data->tokens[1]);
+		_printe("\n");
+	}
+	else if (errorcode == 127)
+	{
+		_printe(data->program_name);
+		_printe(": ");
+		_printe(n_as_string);
+		_printe(": ");
+		_printe(data->command_name);
+		_printe(": not found\n");
+	}
+	else if (errorcode == 126)
+	{
+		_printe(data->program_name);
+		_printe(": ");
+		_printe(n_as_string);
+		_printe(": ");
+		_printe(data->command_name);
+		_printe(": Permission denied\n");
+	}
+	return (0);
 }
-
