@@ -26,7 +26,7 @@ void _getenv(char *nick, char **env);
 char *cat(char *nick, char *anna, char **ven);
 void s_exit(char *anna);
 void _execve(char **nick, char *anna);
-ssize_t _getline(char **p_line, ssize_t *n, FILE *stream);
+ssize_t _getline(char **lineptr, ssize_t *n, FILE *stream);
 char **_strtok(char *input, char *dlm);
 void *_realloc(void *ptr, unsigned int o_size, unsigned int n_size);
 
