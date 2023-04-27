@@ -1,21 +1,20 @@
 #include "alx.h"
 
 /**
- * printenv - prints the environment variable
- * @env: the environment variable to print
- * @ex_st: exit status
- * Return: Always (0) for sucess
+ * execute - Executes programs
+ * command: User input
+ * buffer: A copy of user's command
  */
-int printenv(char **env, int *ex_st)
-{
-	unsigned int i = 0;
 
-	while (env[i] != NULL)
+void execute(char **command, char *buffer)
+{
+	if (fork() == 0)
 	{
-		print_str(env[i]);
-		_putchar('\n');
-		i++;
+		execve(command[0], command, NULL);
+		free(command);
+		free(buffer);
+		exit(EXIT_SUCCESS);
 	}
-	*ex_st = 0;
-	return (EXIT_SUCCESS);
+	else
+		wait(NULL);
 }

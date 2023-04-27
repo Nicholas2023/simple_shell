@@ -13,8 +13,8 @@
 int main(int ac, char **av, char **env)
 {
 	char *input_buffer = NULL, **command = NULL;
-	ssize_t buffer_size = 0, read_char = 0;
-	int status = 0, i = 0, tally = 0;
+	size_t buffer_size = 0;
+	int status = 0, i = 0, tally = 0, read_char = 0;
 
 	(void)ac, (void)av; /* Silence warnings about unused parameters */
 
@@ -34,14 +34,14 @@ int main(int ac, char **av, char **env)
 			if (input_buffer[i] == '\n')
 				input_buffer[i] = '\0';
 		}
-		_getenv(input_buffer, env); /* Exit status in case of "$?" */
-		s_exit(input_buffer); /* Use exit command */
-		command = _token(input_buffer); /* Tokenize buffer */
+		_env(input_buffer, env); /* Exit status in case of "$?" */
+		exitshell(input_buffer); /* Use exit command */
+		command = tokens(input_buffer); /* Tokenize buffer */
 		if (command == NULL)
 			continue;
-		status = _path(command, env); /* Find command path */
+		status = findpath(command, env); /* Find command path */
 		if (status == 1)
-			_execve(command, input_buffer); /* Execute command if found */
+			execute(command, input_buffer); /* Execute command if found */
 		free(command), free(input_buffer), input_buffer = NULL, tally++;
 	}
 	return (0);
