@@ -1,4 +1,4 @@
-#include "holberton.h"
+#include "alx.h"
 /**
  *findpath -  gets the complete full PATH of the commands
  *@command: is the input by the user
