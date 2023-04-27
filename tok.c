@@ -1,37 +1,41 @@
 #include "alx.h"
 /**
- *tokens - will tokenize the arguments passed by the user
- *@str: is the argument passed by the user
- *Return: holder
+ * tokenize - this function separate the string using a designed delimiter
+ * @data: a pointer to the program's data
+ * Return: an array of the different parts of the string
  */
-char **tokens(char *str)
+void tokenize(data_of_program *data)
 {
-	char *token;
-	char **holder = NULL;
-	char *strcopy = NULL;
-	size_t j, counter;
+	char *delimiter = " \t";
+	int i, j, counter = 2, length;
 
-	j = 0, counter = 0;
-	strcopy = _strdup(str);
-	token = strtok(strcopy, " ");
-	while (token)
+	length = str_length(data->input_line);
+	if (length)
 	{
-		token = strtok(NULL, " ");
-		counter++;
+		if (data->input_line[length - 1] == '\n')
+			data->input_line[length - 1] = '\0';
 	}
-	holder = malloc(sizeof(char *) * (counter + 1));
-	if (holder == NULL)
-		free(holder);
-	holder[0] = "\0";
-	token = strtok(str, " ");
-	while (token)
+
+	for (i = 0; data->input_line[i]; i++)
 	{
-		holder[j] = token;
-		token = strtok(NULL, " ");
-		j++;
+		for (j = 0; delimiter[j]; j++)
+		{
+			if (data->input_line[i] == delimiter[j])
+				counter++;
+		}
 	}
-	holder[counter] = NULL;
-	free(strcopy);
-	strcopy = NULL;
-	return (holder);
+
+	data->tokens = malloc(counter * sizeof(char *));
+	if (data->tokens == NULL)
+	{
+		perror(data->program_name);
+		exit(errno);
+	}
+	i = 0;
+	data->tokens[i] = str_duplicate(_strtok(data->input_line, delimiter));
+	data->command_name = str_duplicate(data->tokens[0]);
+	while (data->tokens[i++])
+	{
+		data->tokens[i] = str_duplicate(_strtok(NULL, delimiter));
+	}
 }
