@@ -46,5 +46,4 @@ void no_nl(char *l);
 void free_grid(char **grid, int height);
 int special_char(char *buffer, ssize_t bytes, int *ex_st);
 
-#endif
 #endif /*ALX_H*/
