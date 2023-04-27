@@ -1,23 +1,15 @@
 #include "alx.h"
 
 /**
- * builtins - function that implements the exit and printenv builtins
- * @line: the buffer
- * @args: the parsed arguments
- * @env: the environment
- * @ex_st: the exit status
- * Return: void
+ *exitshell - will exit the shell when the word exit is entered by the user
+ *@buffer: takes the arg from the user
+ *Return: void
  */
-void builtins(char *line, char **args, char **env, int *ex_st)
+void exitshell(char *buffer)
 {
-
-	if (_strcmp(args[0], "exit") == 0)
+	if (_strcmp(buffer, "exit") == 0)
 	{
-		free(args);
-		free(line);
-		exit(*ex_st);
+		free(buffer);
+		exit(EXIT_SUCCESS);
 	}
-
-	if (_strcmp(args[0], "env") == 0)
-		printenv(env, ex_st);
 }
