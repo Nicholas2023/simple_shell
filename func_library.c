@@ -38,20 +38,6 @@ int _strlen(char *anna)
 }
 
 
-
-/**
- * _putchar - Write character x to stdout
- * @x: The character to be written
- *
- * Return: 0 if successful and -1 for error
- */
-
-int _putchar(char x)
-{
-	return (write(1, &x, 1));
-}
-
-
 /**
  * _strcpy - Copies string from one variable to another
  * @nick: A pointer to the source string
