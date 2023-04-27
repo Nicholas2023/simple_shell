@@ -1,52 +1,43 @@
 #include "alx.h"
 
 /**
- * _execve - A function that executes in the main shell
- * @nick: A pointer to the command to be executed
- * @anna: A pointer to an array of parsed user arguments
- *
+ * _execute - function that executes in the main shell
+ * @status: the status of the path, whether the file found is executable or not
+ * @args: the parsed arguments
+ * @ex_st: the exit status
+ * @tal: tally of commands or attempted commands that were run
  * Return: void
  */
-
-
-void _execve(char **nick, char *anna)
+void _execute(int status, char **args, int *ex_st, int *tal)
 {
-	pid_t pid;
-	int status;
-
-	/*Create child process*/
-	pid = fork();
-
-	/*Check if child process was created*/
-	if (pid == -1)
+	if (status == 2)
 	{
-		perror("Error: failed to create child process");
-		exit(EXIT_FAILURE);
-	}
-	/*Execute program*/
-	else if (pid == 0)
-	{
-		/*Check for failure in the execve()*/
-		if (execve(nick[0], nick, NULL) == -1)
+		if (access(args[0], X_OK) == 0)
 		{
-			perror("Error: failed to execute command");
-				exit(EXIT_FAILURE);
+			if (fork() == 0)
+				execve(args[0], args, NULL);
+
+			else
+				wait(NULL);
+			*ex_st = 0;
+		}
+		else if (access(args[0], F_OK) != 0)
+		{
+			print_str("sh: ");
+			print_int(tal);
+			print_str(": ");
+			perror(args[0]);
+			*ex_st = 127;
+		}
+		else if (access(args[0], F_OK) == 0 &&
+			 access(args[0], X_OK) != 0)
+		{
+			print_str("sh: ");
+			print_int(tal);
+			print_str(": ");
+			perror(args[0]);
+			*ex_st = 126;
 		}
 	}
-	else
-	{
-		/*Wait for the child process to terminate*/
-		if (waitpid(pid, &status, 0) == -1)
-		{
-			perror("Error: failed to wait for child process");
-			exit(EXIT_FAILURE);
-		}
-
-		/*Freeing memory*/
-		if (WIFEXITED(status) && WEXITSTATUS(status) == EXIT_SUCCESS)
-		{
-			free(nick);
-			free(anna);
-		}
-	}
+	free(args);
 }
