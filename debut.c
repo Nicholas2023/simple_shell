@@ -9,9 +9,7 @@
  */
 int main(int argc, char **argv, char **env)
 {
-	char *prompt = "##--->";
-	char *line = NULL;
-	char **args = NULL;
+	char *prompt = "##--->", *line = NULL, **args = NULL;
 	int i = 0, status = 0, arg_num = 0;
 	static int exit_stat, tally;
 	size_t len = 0;
