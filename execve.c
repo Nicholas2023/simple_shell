@@ -1,4 +1,5 @@
 #include "alx.h"
+
 /**
  *printenvi - is a built-in that will print the enviroment
  *@env: is the enviroment
@@ -30,3 +31,5 @@ void _env(char *str, char **env)
 		printenvi(env);
 	}
 }
+Footer
+© 2023 GitHub, Inc.
