@@ -1,99 +1,148 @@
-#include "alx.h"
-
-char **_token(char *str);
-size_t count_tokens(char *str, char *delim);
-void free_tokens(char **tokens);
-
-
-#define TOKEN_DELIM " \t\r\n\a,;|&:"
+#include "holberton.h"
 
 /**
- * _token - Parse the arguments passed by the user
- * @str: A pointer to the argument passed by the user
- *
- * Return: tokens of the strings
+ * _putchar - writes the character c to stdout
+ * @c: The character to print
+ * Return: On success 1. On error, -1 is returned..
  */
-
-char **_token(char *str)
+int _putchar(char c)
 {
-	char **holder = NULL;
-	char *str_copy = NULL, *token;
-	size_t num_tokens = 0, i = 0;
-
-	if (str == NULL)
-		return (NULL);
-
-	str_copy = _strdup(str);
-	if (str_copy == NULL)
-		return (NULL);
-
-	num_tokens = count_tokens(str_copy, TOKEN_DELIM);
-
-	holder = malloc((num_tokens + 1) * sizeof(char *));
-	if (holder == NULL)
-	{
-		free(str_copy);
-		return (NULL);
-	}
-
-	token = strtok(str_copy, TOKEN_DELIM);
-
-	while (token != NULL)
-	{
-		holder[i] = _strdup(token);
-		if (holder[i] == NULL)
-		{
-			free_tokens(holder);
-			free(str_copy);
-			return (NULL);
-		}
-		i++;
-		token = strtok(NULL, TOKEN_DELIM);
-	}
-
-	free(str_copy);
-	return (holder);
+	return (write(1, &c, 1));
 }
 
-/**
- * count_tokens - Counts the number of tokens in a string
- * @str: A pointer to the string
- * @delim: A pointer to the delimiters
- * Return: The number of tokens
- */
-
-size_t count_tokens(char *str, char *delim)
-{
-	char *token;
-	size_t count = 0;
-
-	token = strtok(str, delim);
-
-	while (token != NULL)
-	{
-		count++;
-		token = strtok(NULL, delim);
-	}
-
-	return (count);
-}
 
 /**
- * free_tokens - Frees a token array
- * @tokens: A pointer to the token array
+ * print_str - prints string
+ * @s: string to be printed
+ * Return: void
  */
-
-void free_tokens(char **tokens)
+void print_str(char *s)
 {
-	size_t i;
+	int i, bytes, wc;
 
-	if (tokens == NULL)
+	for (i = 0; s[i] != '\0'; i++)
+		;
+
+	bytes = i;
+
+	wc = write(STDOUT_FILENO, s, bytes);
+	if (wc == EOF)
 		return;
+}
 
-	for (i = 0; tokens[i] != NULL; i++)
+
+/**
+ * pathstr - function that prints the path string
+ * @right: string after "PATH ="
+ * @first: first tokenized word
+ * Return: 0 for success
+ */
+char *pathstr(char *right, char *first)
+{
+	char *new = NULL;
+	char *token = NULL;
+	int token_len = 0, first_len = 0;
+
+	token = right;
+	token_len = _strlen(token);
+	first_len = _strlen(first);
+
+	new = malloc((token_len + first_len + 2) * sizeof(char));
+	if (new == NULL)
+		return (NULL);
+
+	new[0] = '\0';
+
+	_strcat(new, right);
+	_strcat(new, "/");
+	_strcat(new, first);
+	_strcat(new, "\0");
+
+	return (new);
+}
+
+/**
+ * print_int - prints an integer
+ * @tally: pointer to the tally number
+ * Return: void
+ */
+void print_int(int *tally)
+{
+	int count = 0, length = 0, j, n;
+	unsigned int base = 1, d, max;
+
+	n = *tally;
+
+	max = n;
+	d = max;
+
+	do {
+		d /= 10;
+		++length;
+	} while (d != 0);
+
+	count += length;
+
+	for (j = 0; j < length -  1; j++)
+		base = base * 10;
+
+	_putchar('0' + (max / base));
+
+	if (length > 1)
 	{
-		free(tokens[i]);
+		for (j = 0; j < length - 2; j++)
+		{
+			base /= 10;
+			d = max / base;
+			_putchar('0' + d % 10);
+		}
+		_putchar('0' + (max % 10));
+	}
+}
+
+
+/**
+ * parser - function that takes a string from the command line and returns the
+ * string as a parsed double pointer using a space as the delimiter
+ * @l: Char pointer storing user input
+ * Return: Char double pointer comprised of a char pointers that each contain
+ * an argument
+ */
+
+char **parser(char *l)
+{
+	char **args;
+
+	char *parsed = NULL;
+	char *parsed2 = NULL;
+	char *linecopy = NULL;
+
+	int arg_num = 0, i = 0;
+
+	linecopy = _strdup(l);
+	parsed = strtok(linecopy, " \t");
+
+	while (parsed != NULL)
+	{
+		arg_num++;
+		parsed = strtok(NULL, " \t");
 	}
 
-	free(tokens);
+	args = malloc(sizeof(char *) * (arg_num + 1));
+
+	if (args == NULL)
+		return (NULL);
+
+	parsed2 = strtok(l, " \t");
+
+	while (parsed2 != NULL)
+	{
+		args[i] = parsed2;
+		parsed2 = strtok(NULL, " \t");
+		i++;
+	}
+
+	args[i] = NULL;
+	free(linecopy);
+	return (args);
 }
