@@ -1,85 +1,86 @@
 #include "alx.h"
 
 /**
- * free_grid - function that frees a 2 dimensional grid of int pointers
- * @grid: Char double pointer to be freed
- * @height: int for height of 2D array to be passed
- * Return: void
+ * long_to_string - converts a number to a string.
+ * @number: number to be converten in an string.
+ * @string: buffer to save the number as string.
+ * @base: base to convert number
+ *
+ * Return: Nothing.
  */
-
-void free_grid(char **grid, int height)
+void long_to_string(long number, char *string, int base)
 {
-	int k;
+	int index = 0, inNegative = 0;
+	long cociente = number;
+	char letters[] = {"0123456789abcdef"};
 
-	for (k = 0; k < height; k++)
-		free(grid[k]);
+	if (cociente == 0)
+		string[index++] = '0';
 
-	free(grid);
+	if (string[0] == '-')
+		inNegative = 1;
+
+	while (cociente)
+	{
+		if (cociente < 0)
+			string[index++] = letters[-(cociente % base)];
+		else
+			string[index++] = letters[cociente % base];
+		cociente /= base;
+	}
+	if (inNegative)
+		string[index++] = '-';
+
+	string[index] = '\0';
+	str_reverse(string);
 }
 
 
 /**
- * no_nl - removes the new line with the NULL character
- * @l: the line
- * Return: nothing
+ * _atoi - convert a string to an integer.
+ *
+ * @s: pointer to str origen.
+ * Return: int of string or 0.
  */
-void no_nl(char *l)
+int _atoi(char *s)
 {
-
-	int i = 0;
-
-	while (l[i])
+	int sign = 1;
+	unsigned int number = 0;
+	/*1- analisys sign*/
+	while (!('0' <= *s && *s <= '9') && *s != '\0')
 	{
-		if (l[i] == '\n')
-		{
-			l[i] = '\0';
-			return;
-		}
-
-		i++;
+		if (*s == '-')
+			sign *= -1;
+		if (*s == '+')
+			sign *= +1;
+		s++;
 	}
+
+	/*2 - extract the number */
+	while ('0' <= *s && *s <= '9' && *s != '\0')
+	{
+
+		number = (number * 10) + (*s - '0');
+		s++;
+	}
+	return (number * sign);
 }
 
-
 /**
- * special_char - if the user types control d, it exits the shell and handles
- * the error when the user keeps on tabbing, it carries out the command
- * @bytes: the number of bytes read in from the user input
- * @buffer: the buffer
- * @ex_st: the exit status
- * Return: Always (0) for succcess
+ * count_characters - count the coincidences of character in string.
+ *
+ * @string: pointer to str origen.
+ * @character: string with  chars to be counted
+ * Return: int of string or 0.
  */
-int  special_char(char *buffer, ssize_t bytes, int *ex_st)
+int count_characters(char *string, char *character)
 {
-	int i = 0;
+	int i = 0, counter = 0;
 
-	if (bytes == EOF && isatty(STDIN_FILENO) == 1)
+	for (; string[i]; i++)
 	{
-		_putchar('\n');
-		free(buffer);
-		exit(*ex_st);
+		if (string[i] == character[0])
+			counter++;
 	}
-
-	if (bytes == EOF && isatty(STDIN_FILENO) == 0)
-	{
-		free(buffer);
-		exit(*ex_st);
-	}
-
-	if (_strcmp(buffer, "\n") == 0)
-	{
-		*ex_st = 0;
-		return (127);
-	}
-
-	while (buffer[i] != '\n')
-	{
-		if (buffer[i] != ' ' && buffer[i] != '\t')
-			return (0);
-
-		++i;
-	}
-
-	*ex_st = 0;
-	return (127);
+	return (counter);
 }
