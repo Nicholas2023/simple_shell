@@ -21,7 +21,7 @@ int main(int argc, char *argv[], char *env[])
 		prompt = COMMAND_PROMPT;
 	}
 	errno = 0;
-	sisifo(prompt, nick);
+	muturi(prompt, nick);
 	return (0);
 }
 
@@ -85,11 +85,11 @@ void kimba(_st *nick, int argc, char *argv[], char **env)
 	}
 }
 /**
- * sisifo - its a infinite loop that shows the prompt
+ * muturi - its a infinite loop that shows the prompt
  * @prompt: prompt to be printed
  * @nick: its a infinite loop that shows the prompt
  */
-void sisifo(char *prompt, _st *nick)
+void muturi(char *prompt, _st *nick)
 {
 	int error_code = 0, string_len = 0;
 
