@@ -1,33 +1,42 @@
 #include "alx.h"
 
+
 /**
- * _print - writes a array of chars in the standar output
- * @string: pointer to the array of chars
- * Return: the number of bytes writed or .
- * On error, -1 is returned, and errno is set appropriately.
+ * _print - Writes a sring to the stdout
+ * @string: A pointer to the string
+ *
+ * Return: String bytes
  */
+
+
 int _print(char *string)
 {
 	return (write(STDOUT_FILENO, string, str_length(string)));
 }
+
+
 /**
- * _printe - writes a array of chars in the standar error
- * @string: pointer to the array of chars
- * Return: the number of bytes writed or .
- * On error, -1 is returned, and errno is set appropriately.
+ * _printe - Write a string to the stdout
+ * @string: A pointer to the string
+ *
+ * Return: String bytes
  */
+
+
 int _printe(char *string)
 {
 	return (write(STDERR_FILENO, string, str_length(string)));
 }
 
+
 /**
- * _print_error - writes a array of chars in the standart error
- * @nick: a pointer to the program's data'
- * @errorcode: error code to print
- * Return: the number of bytes writed or .
- * On error, -1 is returned, and errno is set appropriately.
+ * _print_error - Write a string to the stdout
+ * @nick: a pointer to struct
+ * @errorcode: code error
+ *
+ * Return: the number of bytes written
  */
+
 int _print_error(int errorcode, _st *nick)
 {
 	char n_as_string[10] = {'\0'};
