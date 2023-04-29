@@ -2,21 +2,21 @@
 
 /**
  * free_recurrent_data - free the fields needed each loop
- * @data: struct of the program's data
+ * @nick: struct of the program's data
  * Return: Nothing
  */
-void free_recurrent_data(data_of_program *data)
+void free_recurrent_data(_st *nick)
 {
-	if (data->tokens)
-		free_array_of_pointers(data->tokens);
-	if (data->input_line)
-		free(data->input_line);
-	if (data->command_name)
-		free(data->command_name);
+	if (nick->f)
+		free_array_of_pointers(nick->f);
+	if (nick->b)
+		free(nick->b);
+	if (nick->c)
+		free(nick->c);
 
-	data->input_line = NULL;
-	data->command_name = NULL;
-	data->tokens = NULL;
+	nick->b = NULL;
+	nick->c = NULL;
+	nick->f = NULL;
 }
 
 /**
@@ -24,16 +24,16 @@ void free_recurrent_data(data_of_program *data)
  * @data: struct of the program's data
  * Return: Nothing
  */
-void free_all_data(data_of_program *data)
+void free_all_data(_st *nick)
 {
-	if (data->file_descriptor != 0)
+	if (nick->e != 0)
 	{
-		if (close(data->file_descriptor))
-			perror(data->program_name);
+		if (close(nick->e))
+			perror(nick->a);
 	}
-	free_recurrent_data(data);
-	free_array_of_pointers(data->env);
-	free_array_of_pointers(data->alias_list);
+	free_recurrent_data(nick);
+	free_array_of_pointers(nick->env);
+	free_array_of_pointers(nick->h);
 }
 
 /**
