@@ -15,7 +15,7 @@ int builtins_list(_st *nick)
 		{"exit", blt_in_ext},
 		{"help", blt_in_hlp},
 		{"cd", blt_in_cd},
-		{"alias", builtin_alias},
+		{"alias", blt_in_alias},
 		{"env", builtin_env},
 		{"setenv", builtin_set_env},
 		{"unsetenv", builtin_unset_env},

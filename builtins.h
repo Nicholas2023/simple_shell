@@ -7,7 +7,7 @@ int blt_in_ext(_st *nick);
 int blt_in_cd(_st *nick);
 int st_wk_dir(_st *nick, char *new_dir);
 int blt_in_hlp(_st *nick);
-int builtin_alias(_st *nick);
+int blt_in_alias(_st *nick);
 int builtin_env(_st *nick);
 int builtin_set_env(_st *nick);
 int builtin_unset_env(_st *nick);

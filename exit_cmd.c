@@ -151,14 +151,14 @@ int blt_in_hlp(_st *nick)
 
 
 /**
- * builtin_alias - A func that sets aliases
+ * blt_in_alias - A func that sets aliases
  * @nick: A pointer to struct
  *
  * Return: 0 for successfull code
  */
 
 
-int builtin_alias(_st *nick)
+int blt_in_alias(_st *nick)
 {
 	int i = 0;
 
