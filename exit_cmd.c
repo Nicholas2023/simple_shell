@@ -2,14 +2,14 @@
 
 
 /**
- * builtin_exit - A func that quits the shell program
+ * blt_in_ext - A func that quits the shell program
  * @nick: A pointer to struct
  * Return: 0 if successfull
  *
  */
 
 
-int builtin_exit(_st *nick)
+int blt_in_ext(_st *nick)
 {
 	int i;
 
