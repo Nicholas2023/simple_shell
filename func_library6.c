@@ -2,13 +2,13 @@
 
 /**
 * _getline - read one line from the prompt.
-* @data: struct for the program's data
+* @nick: struct for the program's data
 *
 * Return: reading counting bytes.
 */
-int _getline(data_of_program *data)
+int _getline(_st *nick)
 {
-	char buff[BUFFER_SIZE] = {'\0'};
+	char buff[B_SIZ] = {'\0'};
 	static char *array_commands[10] = {NULL};
 	static char array_operators[10] = {'\0'};
 	ssize_t bytes_read, i = 0;
@@ -26,7 +26,7 @@ int _getline(data_of_program *data)
 		}
 
 		/* read from the file descriptor int to buff */
-		bytes_read = read(data->file_descriptor, &buff, BUFFER_SIZE - 1);
+		bytes_read = read(nick->e, &buff, B_SIZ - 1);
 		if (bytes_read == 0)
 			return (-1);
 
@@ -40,14 +40,14 @@ int _getline(data_of_program *data)
 	}
 
 	/*obtains the next command (command 0) and remove it for the array*/
-	data->input_line = array_commands[0];
+	nick->b = array_commands[0];
 	for (i = 0; array_commands[i]; i++)
 	{
 		array_commands[i] = array_commands[i + 1];
 		array_operators[i] = array_operators[i + 1];
 	}
 
-	return (str_length(data->input_line));
+	return (str_length(nick->b));
 }
 
 
