@@ -3,9 +3,10 @@
 int check_file(char *full_path);
 
 /**
- * find_program - find a program in path
- * @nick: a pointer to the program's data
- * Return: 0 if success, errcode otherwise
+ * find_program - find path
+ * @nick: a pointer to struct.
+ *
+ * Return: 0 if successfull.
  */
 
 int find_program(_st *nick)
@@ -16,7 +17,6 @@ int find_program(_st *nick)
 	if (!nick->c)
 		return (2);
 
-	/**if is a full_path or an executable in the same path */
 	if (nick->c[0] == '/' || nick->c[0] == '.')
 		return (check_file(nick->c));
 
@@ -25,7 +25,7 @@ int find_program(_st *nick)
 	if (!nick->f[0])
 		return (2);
 
-	directories = tokenize_path(nick);/* search in the PATH */
+	directories = tokenize_path(nick);
 
 	if (!directories || !directories[0])
 	{
@@ -33,11 +33,11 @@ int find_program(_st *nick)
 		return (127);
 	}
 	for (i = 0; directories[i]; i++)
-	{/* appends the function_name to path */
+	{
 		directories[i] = str_concat(directories[i], nick->f[0]);
 		ret_code = check_file(directories[i]);
 		if (ret_code == 0 || ret_code == 126)
-		{/* the file was found, is not a directory and has execute permisions*/
+		{
 			errno = 0;
 			free(nick->f[0]);
 			nick->f[0] = str_duplicate(directories[i]);
@@ -51,10 +51,12 @@ int find_program(_st *nick)
 	return (ret_code);
 }
 
+
 /**
- * tokenize_path - tokenize the path in directories
- * @nick: a pointer to the program's data
- * Return: array of path directories
+ * tokenize_path - tokenize the path.
+ * @nick: a pointer to struct
+ *
+ * Return: array of the  path
  */
 
 char **tokenize_path(_st *nick)
@@ -65,15 +67,15 @@ char **tokenize_path(_st *nick)
 	char *PATH;
 
 	/* get the PATH value*/
+
 	PATH = env_get_key("PATH", nick);
 	if ((PATH == NULL) || PATH[0] == '\0')
-	{/*path not found*/
+	{
 		return (NULL);
 	}
 
 	PATH = str_duplicate(PATH);
 
-	/* find the number of directories in the PATH */
 	for (i = 0; PATH[i]; i++)
 	{
 		if (PATH[i] == ':')
@@ -98,10 +100,10 @@ char **tokenize_path(_st *nick)
 }
 
 /**
- * check_file - checks if exists a file, if it is not a dairectory and
- * if it has excecution permisions for permisions.
+ * check_file - checks if exists a file.
  * @full_path: pointer to the full file name
- * Return: 0 on success, or error code if it exists.
+ *
+ * Return: 0 on successfull
  */
 
 int check_file(char *full_path)
