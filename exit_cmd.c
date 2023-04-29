@@ -32,14 +32,14 @@ int blt_in_ext(_st *nick)
 
 
 /**
- * builtin_cd - A func that changes current dir
+ * blt_in_cd - A func that changes current dir
  * @nick: A pointer to struct
  * Return: 0 if successfull
  *
  */
 
 
-int builtin_cd(_st *nick)
+int blt_in_cd(_st *nick)
 {
 	char *dir_home = env_get_key("HOME", nick), *dir_old = NULL;
 	char old_dir[128] = {0};

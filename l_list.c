@@ -14,7 +14,7 @@ int builtins_list(_st *nick)
 	builtins options[] = {
 		{"exit", blt_in_ext},
 		{"help", builtin_help},
-		{"cd", builtin_cd},
+		{"cd", blt_in_cd},
 		{"alias", builtin_alias},
 		{"env", builtin_env},
 		{"setenv", builtin_set_env},
