@@ -1,9 +1,9 @@
 #include "alx.h"
 
 /**
- * builtin_env - shows the environment where the shell runs
- * @nick: struct for the program's data
- * Return: zero if sucess, or other number if its declared in the arguments
+ * builtin_env - displays environment variables
+ * @nick: a pointer to struct
+ * Return: 0 if sucessful, or otherwise if fails.
  */
 int builtin_env(_st *nick)
 {
@@ -11,16 +11,15 @@ int builtin_env(_st *nick)
 	char cpname[50] = {'\0'};
 	char *var_copy = NULL;
 
-	/* if not arguments */
+	/* check if it a NULL argument */
 	if (nick->f[1] == NULL)
 		print_environ(nick);
 	else
 	{
 		for (i = 0; nick->f[1][i]; i++)
-		{/* checks if exists a char = */
+		{
 			if (nick->f[1][i] == '=')
-			{/* checks if exists a var with the same name and change its value*/
-			/* temporally */
+			{
 				var_copy = str_duplicate(env_get_key(cpname, nick));
 				if (var_copy != NULL)
 					env_set_key(cpname, nick->f[1] + i + 1, nick);
@@ -28,12 +27,12 @@ int builtin_env(_st *nick)
 				/* print the environ */
 				print_environ(nick);
 				if (env_get_key(cpname, nick) == NULL)
-				{/* print the variable if it does not exist in the environ */
+				{
 					_print(nick->f[1]);
 					_print("\n");
 				}
 				else
-				{/* returns the old value of the var*/
+				{
 					env_set_key(cpname, var_copy, nick);
 					free(var_copy);
 				}
@@ -49,13 +48,13 @@ int builtin_env(_st *nick)
 }
 
 /**
- * builtin_set_env - ..
- * @nick: struct for the program's data
- * Return: zero if sucess, or other number if its declared in the arguments
+ * builtin_set_env - a function that set env variables.
+ * @nick:a pointer to struct.
+ * Return: 0 if sucessfull.
  */
+
 int builtin_set_env(_st *nick)
 {
-	/* validate args */
 	if (nick->f[1] == NULL || nick->f[2] == NULL)
 		return (0);
 	if (nick->f[3] != NULL)
@@ -71,13 +70,12 @@ int builtin_set_env(_st *nick)
 }
 
 /**
- * builtin_unset_env - ..
- * @nick: struct for the program's data'
- * Return: ..
+ * builtin_unset_env - a function that unsets env variables.
+ * @nick: a pointer to struct
+ * Return: 0 if successfull.
  */
 int builtin_unset_env(_st *nick)
 {
-	/* validate args */
 	if (nick->f[1] == NULL)
 		return (0);
 	if (nick->f[2] != NULL)
