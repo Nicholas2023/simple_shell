@@ -48,12 +48,12 @@ int blt_in_env(_st *nick)
 }
 
 /**
- * builtin_set_env - a function that set env variables.
+ * blt_set_env - a function that set env variables.
  * @nick:a pointer to struct.
  * Return: 0 if sucessfull.
  */
 
-int builtin_set_env(_st *nick)
+int blt_set_env(_st *nick)
 {
 	if (nick->f[1] == NULL || nick->f[2] == NULL)
 		return (0);
