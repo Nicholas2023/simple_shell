@@ -1,41 +1,41 @@
 #include "alx.h"
 /**
  * tokenize - this function separate the string using a designed delimiter
- * @data: a pointer to the program's data
+ * @nick: a pointer to the program's data
  * Return: an array of the different parts of the string
  */
-void tokenize(data_of_program *data)
+void tokenize(_st *nick)
 {
 	char *delimiter = " \t";
 	int i, j, counter = 2, length;
 
-	length = str_length(data->input_line);
+	length = str_length(nick->b);
 	if (length)
 	{
-		if (data->input_line[length - 1] == '\n')
-			data->input_line[length - 1] = '\0';
+		if (nick->b[length - 1] == '\n')
+			nick->b[length - 1] = '\0';
 	}
 
-	for (i = 0; data->input_line[i]; i++)
+	for (i = 0; nick->b[i]; i++)
 	{
 		for (j = 0; delimiter[j]; j++)
 		{
-			if (data->input_line[i] == delimiter[j])
+			if (nick->b[i] == delimiter[j])
 				counter++;
 		}
 	}
 
-	data->tokens = malloc(counter * sizeof(char *));
-	if (data->tokens == NULL)
+	nick->f = malloc(counter * sizeof(char *));
+	if (nick->f == NULL)
 	{
-		perror(data->program_name);
+		perror(nick->a);
 		exit(errno);
 	}
 	i = 0;
-	data->tokens[i] = str_duplicate(_strtok(data->input_line, delimiter));
-	data->command_name = str_duplicate(data->tokens[0]);
-	while (data->tokens[i++])
+	nick->f[i] = str_duplicate(_strtok(nick->b, delimiter));
+	nick->c = str_duplicate(nick->f[0]);
+	while (nick->f[i++])
 	{
-		data->tokens[i] = str_duplicate(_strtok(NULL, delimiter));
+		nick->f[i] = str_duplicate(_strtok(NULL, delimiter));
 	}
 }
