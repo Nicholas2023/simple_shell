@@ -4,28 +4,28 @@ int check_file(char *full_path);
 
 /**
  * find_program - find a program in path
- * @data: a pointer to the program's data
+ * @nick: a pointer to the program's data
  * Return: 0 if success, errcode otherwise
  */
 
-int find_program(data_of_program *data)
+int find_program(_st *nick)
 {
 	int i = 0, ret_code = 0;
 	char **directories;
 
-	if (!data->command_name)
+	if (!nick->c)
 		return (2);
 
 	/**if is a full_path or an executable in the same path */
-	if (data->command_name[0] == '/' || data->command_name[0] == '.')
-		return (check_file(data->command_name));
+	if (nick->c[0] == '/' || nick->c[0] == '.')
+		return (check_file(nick->c));
 
-	free(data->tokens[0]);
-	data->tokens[0] = str_concat(str_duplicate("/"), data->command_name);
-	if (!data->tokens[0])
+	free(nick->f[0]);
+	nick->f[0] = str_concat(str_duplicate("/"), nick->c);
+	if (!nick->f[0])
 		return (2);
 
-	directories = tokenize_path(data);/* search in the PATH */
+	directories = tokenize_path(nick);/* search in the PATH */
 
 	if (!directories || !directories[0])
 	{
@@ -34,30 +34,30 @@ int find_program(data_of_program *data)
 	}
 	for (i = 0; directories[i]; i++)
 	{/* appends the function_name to path */
-		directories[i] = str_concat(directories[i], data->tokens[0]);
+		directories[i] = str_concat(directories[i], nick->f[0]);
 		ret_code = check_file(directories[i]);
 		if (ret_code == 0 || ret_code == 126)
 		{/* the file was found, is not a directory and has execute permisions*/
 			errno = 0;
-			free(data->tokens[0]);
-			data->tokens[0] = str_duplicate(directories[i]);
+			free(nick->f[0]);
+			nick->f[0] = str_duplicate(directories[i]);
 			free_array_of_pointers(directories);
 			return (ret_code);
 		}
 	}
-	free(data->tokens[0]);
-	data->tokens[0] = NULL;
+	free(nick->f[0]);
+	nick->f[0] = NULL;
 	free_array_of_pointers(directories);
 	return (ret_code);
 }
 
 /**
  * tokenize_path - tokenize the path in directories
- * @data: a pointer to the program's data
+ * @nick: a pointer to the program's data
  * Return: array of path directories
  */
 
-char **tokenize_path(data_of_program *data)
+char **tokenize_path(_st *nick)
 {
 	int i = 0;
 	int counter_directories = 2;
@@ -65,7 +65,7 @@ char **tokenize_path(data_of_program *data)
 	char *PATH;
 
 	/* get the PATH value*/
-	PATH = env_get_key("PATH", data);
+	PATH = env_get_key("PATH", nick);
 	if ((PATH == NULL) || PATH[0] == '\0')
 	{/*path not found*/
 		return (NULL);
