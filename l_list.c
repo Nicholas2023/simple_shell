@@ -21,7 +21,7 @@ int builtins_list(_st *nick)
 		{"unsetenv", builtin_unset_env},
 		{NULL, NULL}
 	};
-	
+
 	/*the structure*/
 
 	for (iterator = 0; options[iterator].builtin != NULL; iterator++)

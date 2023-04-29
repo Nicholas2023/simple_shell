@@ -44,7 +44,7 @@ void handle_ctrl_c(int opr UNUSED)
 /**
  * kimba - A func that initializes the struct
  * @nick: pointer to struct data
- * @argv: Array pointer to user input 
+ * @argv: Array pointer to user input
  * @env: env variables
  * @argc: Number of arguments for the CLI
  *
@@ -59,7 +59,7 @@ void kimba(_st *nick, int argc, char *argv[], char **env)
 	nick->b = NULL;
 	nick->c = NULL;
 	nick->d = 0;
-	
+
 	if (argc == 1)
 		nick->e = STDIN_FILENO;
 	else
@@ -97,7 +97,7 @@ void kimba(_st *nick, int argc, char *argv[], char **env)
 
 /**
  * muturi - A func that prints CMD PROMPT infinitely
- * @prompt: A pointer to Shell prompt 
+ * @prompt: A pointer to Shell prompt
  * @nick: A pointer to struct
  *
  */
