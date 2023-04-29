@@ -13,7 +13,7 @@ int builtins_list(_st *nick)
 	int iterator;
 	builtins options[] = {
 		{"exit", blt_in_ext},
-		{"help", builtin_help},
+		{"help", blt_in_hlp},
 		{"cd", blt_in_cd},
 		{"alias", builtin_alias},
 		{"env", builtin_env},

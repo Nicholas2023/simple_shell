@@ -105,14 +105,14 @@ int st_wk_dir(_st *nick, char *new_dir)
 
 
 /**
- * builtin_help - A func that displays env variables
+ * blt_in_hlp - A func that displays env variables
  * @nick: A pointer to struct
  *
  * Return: 0 if successfull
  */
 
 
-int builtin_help(_st *nick)
+int blt_in_hlp(_st *nick)
 {
 	int i, length = 0;
 	char *van[6] = {NULL};
