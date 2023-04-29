@@ -1,11 +1,14 @@
 #include "alx.h"
 
+
 /**
- * _strtok - separates strings with delimiters
- * @line: It´s pointer to array we receive in getline.
- * @delim: It´s characters we mark off string in parts.
- * Return: A pointer to the created token
+ * _strtok - string separation using delimiter.
+ * @line: a pointer to an array.
+ * @delim: character that separates strings.
+ *
+ * Return: A pointer to a token.
 */
+
 char *_strtok(char *line, char *delim)
 {
 	int j;
@@ -14,6 +17,7 @@ char *_strtok(char *line, char *delim)
 
 	if (line != NULL)
 		str = line;
+
 	for (; *str != '\0'; str++)
 	{
 		for (j = 0; delim[j] != '\0'; j++)
