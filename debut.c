@@ -1,23 +1,27 @@
 #include "alx.h"
+
+
 /**
- * main - initialize the variables of the program
- * @argc: number of values received from the command line
- * @argv: values received from the command line
- * @env: number of values received from the command line
- * Return: zero on succes.
+ * main - Entry point of the shell program
+ * @argc: Number of CL arguments
+ * @argv: Command line arguments
+ * @env: Environment variables
+ *
+ * Return: 0 is successfull
  */
+
+
 int main(int argc, char *argv[], char *env[])
 {
 	_st data_struct = {NULL}, *nick = &data_struct;
 	char *prompt = "";
 
 	kimba(nick, argc, argv, env);
-
 	signal(SIGINT, handle_ctrl_c);
-
 	if (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO) && argc == 1)
-	{/* We are in the terminal, interactive mode */
-		errno = 2;/*???????*/
+	{
+		/* Command prompt*/
+		errno = 2;
 		prompt = COMMAND_PROMPT;
 	}
 	errno = 0;
@@ -26,9 +30,9 @@ int main(int argc, char *argv[], char *env[])
 }
 
 /**
- * handle_ctrl_c - print the prompt in a new line
- * when the signal SIGINT (ctrl + c) is send to the program
+ * handle_ctrl_c - A function that prints the CMD PROMPT
  * @UNUSED: option of the prototype
+ *
  */
 void handle_ctrl_c(int opr UNUSED)
 {
@@ -36,13 +40,17 @@ void handle_ctrl_c(int opr UNUSED)
 	_print(COMMAND_PROMPT);
 }
 
+
 /**
- * kimba - inicialize the struct with the info of the program
- * @nick: pointer to the structure of data
- * @argv: array of arguments pased to the program execution
- * @env: environ pased to the program execution
- * @argc: number of values received from the command line
+ * kimba - A func that initializes the struct
+ * @nick: pointer to struct data
+ * @argv: Array pointer to user input 
+ * @env: env variables
+ * @argc: Number of arguments for the CLI
+ *
  */
+
+
 void kimba(_st *nick, int argc, char *argv[], char **env)
 {
 	int i = 0;
@@ -51,7 +59,7 @@ void kimba(_st *nick, int argc, char *argv[], char **env)
 	nick->b = NULL;
 	nick->c = NULL;
 	nick->d = 0;
-	/* define the file descriptor to be readed*/
+	
 	if (argc == 1)
 		nick->e = STDIN_FILENO;
 	else
@@ -84,11 +92,17 @@ void kimba(_st *nick, int argc, char *argv[], char **env)
 		nick->h[i] = NULL;
 	}
 }
+
+
+
 /**
- * muturi - its a infinite loop that shows the prompt
- * @prompt: prompt to be printed
- * @nick: its a infinite loop that shows the prompt
+ * muturi - A func that prints CMD PROMPT infinitely
+ * @prompt: A pointer to Shell prompt 
+ * @nick: A pointer to struct
+ *
  */
+
+
 void muturi(char *prompt, _st *nick)
 {
 	int error_code = 0, string_len = 0;
@@ -101,7 +115,7 @@ void muturi(char *prompt, _st *nick)
 		if (error_code == EOF)
 		{
 			free_all_data(nick);
-			exit(errno); /* if EOF is the fisrt Char of string, exit*/
+			exit(errno);
 		}
 		if (string_len >= 1)
 		{
@@ -109,7 +123,7 @@ void muturi(char *prompt, _st *nick)
 			expand_variables(nick);
 			tokenize(nick);
 			if (nick->f[0])
-			{ /* if a text is given to prompt, execute */
+			{
 				error_code = execute(nick);
 				if (error_code != 0)
 					_print_error(error_code, nick);
