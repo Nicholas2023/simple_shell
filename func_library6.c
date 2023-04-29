@@ -1,11 +1,13 @@
 #include "alx.h"
 
 /**
-* _getline - read one line from the prompt.
-* @nick: struct for the program's data
+* _getline - A func that reads user input
+* @nick: A pointer to struct
 *
-* Return: reading counting bytes.
+* Return: The number of user input bytes
 */
+
+
 int _getline(_st *nick)
 {
 	char buff[B_SIZ] = {'\0'};
@@ -13,19 +15,16 @@ int _getline(_st *nick)
 	static char array_operators[10] = {'\0'};
 	ssize_t bytes_read, i = 0;
 
-	/* check if doesnot exist more commands in the array */
-	/* and checks the logical operators */
 	if (!array_commands[0] || (array_operators[0] == '&' && errno != 0) ||
 		(array_operators[0] == '|' && errno == 0))
 	{
-		/*free the memory allocated in the array if it exists */
+		/*free the memory allocated in the array if it exists*/
 		for (i = 0; array_commands[i]; i++)
 		{
 			free(array_commands[i]);
 			array_commands[i] = NULL;
 		}
 
-		/* read from the file descriptor int to buff */
 		bytes_read = read(nick->e, &buff, B_SIZ - 1);
 		if (bytes_read == 0)
 			return (-1);
@@ -39,7 +38,6 @@ int _getline(_st *nick)
 		} while (array_commands[i++]);
 	}
 
-	/*obtains the next command (command 0) and remove it for the array*/
 	nick->b = array_commands[0];
 	for (i = 0; array_commands[i]; i++)
 	{
@@ -52,19 +50,21 @@ int _getline(_st *nick)
 
 
 /**
-* check_logic_ops - checks and split for && and || operators
-* @array_commands: array of the commands.
-* @i: index in the array_commands to be checked
-* @array_operators: array of the logical operators for each previous command
+* check_logic_ops - Checks for && and || delimeters
+* @array_commands: pointer array to user in command
+* @i: Character index of input data
+* @array_operators: A pointer array to the logical operatoers delimeter
 *
-* Return: index of the last command in the array_commands.
+* Return: Index of the last delimeter in the string
 */
+
+
 int check_logic_ops(char *array_commands[], int i, char array_operators[])
 {
 	char *temp = NULL;
 	int j;
 
-	/* checks for the & char in the command line*/
+	/*check for the & in user input*/
 	for (j = 0; array_commands[i] != NULL  && array_commands[i][j]; j++)
 	{
 		if (array_commands[i][j] == '&' && array_commands[i][j + 1] == '&')
@@ -81,7 +81,6 @@ int check_logic_ops(char *array_commands[], int i, char array_operators[])
 		}
 		if (array_commands[i][j] == '|' && array_commands[i][j + 1] == '|')
 		{
-			/* split the line when chars || was found */
 			temp = array_commands[i];
 			array_commands[i][j] = '\0';
 			array_commands[i] = str_duplicate(array_commands[i]);
