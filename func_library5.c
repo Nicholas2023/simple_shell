@@ -21,7 +21,7 @@ void free_recurrent_data(_st *nick)
 
 /**
  * free_all_data - free all field of the data
- * @data: struct of the program's data
+ * @nick: struct of the program's data
  * Return: Nothing
  */
 void free_all_data(_st *nick)

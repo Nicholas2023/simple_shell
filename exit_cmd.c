@@ -136,7 +136,7 @@ int builtin_help(_st *nick)
 
 /**
  * builtin_alias - add, remove or show aliases
- * @data: struct for the program's data
+ * @nick: struct for the program's data
  * Return: zero if sucess, or other number if its declared in the arguments
  */
 int builtin_alias(_st *nick)
