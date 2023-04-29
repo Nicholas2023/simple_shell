@@ -11,7 +11,7 @@ int main(int argc, char *argv[], char *env[])
 	_st data_struct = {NULL}, *nick = &data_struct;
 	char *prompt = "";
 
-	inicialize_data(nick, argc, argv, env);
+	kimba(nick, argc, argv, env);
 
 	signal(SIGINT, handle_ctrl_c);
 
@@ -37,13 +37,13 @@ void handle_ctrl_c(int opr UNUSED)
 }
 
 /**
- * inicialize_data - inicialize the struct with the info of the program
+ * kimba - inicialize the struct with the info of the program
  * @nick: pointer to the structure of data
  * @argv: array of arguments pased to the program execution
  * @env: environ pased to the program execution
  * @argc: number of values received from the command line
  */
-void inicialize_data(_st *nick, int argc, char *argv[], char **env)
+void kimba(_st *nick, int argc, char *argv[], char **env)
 {
 	int i = 0;
 

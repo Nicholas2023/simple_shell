@@ -2,7 +2,7 @@
 #define SIMPLE_SHELL_H
 
 
-void inicialize_data(_st *nick, int arc, char *argv[], char **env);
+void kimba(_st *nick, int arc, char *argv[], char **env);
 void sisifo(char *prompt, _st *nick);
 void handle_ctrl_c(int opr UNUSED);
 int check_logic_ops(char *array_commands[], int i, char array_operators[]);
