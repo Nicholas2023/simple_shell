@@ -1,11 +1,13 @@
 #include "alx.h"
 
 /**
- * expand_variables - expand variables
- * @nick: a pointer to a struct of the program's data
+ * expand_variables - A function that expands special characters
+ * @nick: a pointer to struct
  *
- * Return: nothing, but sets errno.
+ * Return: void
  */
+
+
 void expand_variables(_st *nick)
 {
 	int i, j;
@@ -50,12 +52,15 @@ void expand_variables(_st *nick)
 	}
 }
 
+
 /**
- * expand_alias - expans aliases
- * @nick: a pointer to a struct of the program's data
+ * expand_alias - A functionthat expands aliases
+ * @nick: a pointer to struct
  *
- * Return: nothing, but sets errno.
+ * Return: void
  */
+
+
 void expand_alias(_st *nick)
 {
 	int i, j, was_expanded = 0;
@@ -92,12 +97,16 @@ void expand_alias(_st *nick)
 	}
 }
 
+
 /**
- * buffer_add - append string at end of the buffer
- * @buffer: buffer to be filled
- * @str_to_add: string to be copied in the buffer
- * Return: nothing, but sets errno.
+ * buffer_add - A function appends strings
+ * @buffer: A pointer to buffer
+ * @str_to_add: string to append to buffer
+ *
+ * Return: void
  */
+
+
 int buffer_add(char *buffer, char *str_to_add)
 {
 	int length, i;
