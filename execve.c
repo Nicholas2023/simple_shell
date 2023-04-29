@@ -10,7 +10,7 @@ int execute(_st *nick)
 	int retval = 0, status;
 	pid_t pidd;
 
-	retval = builtins_list(nick);
+	retval = blt_in_lst(nick);
 	if (retval != -1)
 		return (retval);
 

@@ -11,7 +11,7 @@ void expand_alias(_st *nick);
 int buffer_add(char *buffer, char *str_to_add);
 void tokenize(_st *nick);
 int execute(_st *nick);
-int builtins_list(_st *nick);
+int blt_in_lst(_st *nick);
 int print_alias(_st *nick, char *alias);
 char *get_alias(_st *nick, char *alias);
 int set_alias(char *alias_string, _st *nick);

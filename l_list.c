@@ -2,13 +2,13 @@
 
 
 /**
- * builtins_list - a program that execute builtin
+ * blt_in_lst - a program that execute builtin
  * @nick: a pointer to struct
  *
  * Return: Return a function value,otherwise returns -1.
  **/
 
-int builtins_list(_st *nick)
+int blt_in_lst(_st *nick)
 {
 	int iterator;
 	builtins options[] = {
