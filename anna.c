@@ -1,11 +1,11 @@
 #include "alx.h"
 
 /**
- * builtin_env - displays environment variables
+ * blt_in_env - displays environment variables
  * @nick: a pointer to struct
  * Return: 0 if sucessful, or otherwise if fails.
  */
-int builtin_env(_st *nick)
+int blt_in_env(_st *nick)
 {
 	int i;
 	char cpname[50] = {'\0'};
