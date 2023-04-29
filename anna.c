@@ -70,11 +70,11 @@ int blt_set_env(_st *nick)
 }
 
 /**
- * builtin_unset_env - a function that unsets env variables.
+ * blt_in_unset_env - a function that unsets env variables.
  * @nick: a pointer to struct
  * Return: 0 if successfull.
  */
-int builtin_unset_env(_st *nick)
+int blt_in_unset_env(_st *nick)
 {
 	if (nick->f[1] == NULL)
 		return (0);

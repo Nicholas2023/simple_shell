@@ -10,7 +10,7 @@ int blt_in_hlp(_st *nick);
 int blt_in_alias(_st *nick);
 int blt_in_env(_st *nick);
 int blt_set_env(_st *nick);
-int builtin_unset_env(_st *nick);
+int blt_in_unset_env(_st *nick);
 int builtins_list(_st *nick);
 
 #endif /* BUILTINS_H */

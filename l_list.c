@@ -18,7 +18,7 @@ int builtins_list(_st *nick)
 		{"alias", blt_in_alias},
 		{"env", blt_in_env},
 		{"setenv", blt_set_env},
-		{"unsetenv", builtin_unset_env},
+		{"unsetenv", blt_in_unset_env},
 		{NULL, NULL}
 	};
 
