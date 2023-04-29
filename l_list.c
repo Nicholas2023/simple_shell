@@ -1,11 +1,13 @@
-#include "alx.h"
+#include "alx.h"i
+
 
 /**
- * builtins_list - search for match and execute the associate builtin
- * @nick: struct for the program's data
- * Return: Returns the return of the function executed is there is a match,
- * otherwise returns -1.
+ * builtins_list - a program that execute builtin
+ * @nick: a pointer to struct
+ *
+ * Return: Return a function value,otherwise returns -1.
  **/
+
 int builtins_list(_st *nick)
 {
 	int iterator;
@@ -19,17 +21,17 @@ int builtins_list(_st *nick)
 		{"unsetenv", builtin_unset_env},
 		{NULL, NULL}
 	};
+	
+	/*the structure*/
 
-/*walk through the structure*/
 	for (iterator = 0; options[iterator].builtin != NULL; iterator++)
 	{
-/*if there is a match between the given command and a builtin,*/
 		if (str_compare(options[iterator].builtin, nick->c, 0))
 		{
-/*execute the function, and return the return value of the function*/
+			/* execute a function */
+
 			return (options[iterator].function(nick));
 		}
-/*if there is no match return -1 */
 	}
 	return (-1);
 }
