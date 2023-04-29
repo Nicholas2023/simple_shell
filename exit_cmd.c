@@ -51,7 +51,7 @@ int blt_in_cd(_st *nick)
 		{
 			dir_old = env_get_key("OLDPWD", nick);
 			if (dir_old)
-				error_code = set_work_directory(nick, dir_old);
+				error_code = st_wk_dir(nick, dir_old);
 			_print(env_get_key("PWD", nick));
 			_print("\n");
 
@@ -59,7 +59,7 @@ int blt_in_cd(_st *nick)
 		}
 		else
 		{
-			return (set_work_directory(nick, nick->f[1]));
+			return (st_wk_dir(nick, nick->f[1]));
 		}
 	}
 	else
@@ -67,14 +67,14 @@ int blt_in_cd(_st *nick)
 		if (!dir_home)
 			dir_home = getcwd(old_dir, 128);
 
-		return (set_work_directory(nick, dir_home));
+		return (st_wk_dir(nick, dir_home));
 	}
 	return (0);
 }
 
 
 /**
- * set_work_directory - Sets PWD
+ * st_wk_dir - Sets PWD
  * @nick: A pointer to struct
  * @new_dir: A pointer to the path of new_dir
  *
@@ -82,7 +82,7 @@ int blt_in_cd(_st *nick)
  */
 
 
-int set_work_directory(_st *nick, char *new_dir)
+int st_wk_dir(_st *nick, char *new_dir)
 {
 	char old_dir[128] = {0};
 	int err_code = 0;

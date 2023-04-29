@@ -5,7 +5,7 @@
 /* Builtin prototypes */
 int blt_in_ext(_st *nick);
 int blt_in_cd(_st *nick);
-int set_work_directory(_st *nick, char *new_dir);
+int st_wk_dir(_st *nick, char *new_dir);
 int builtin_help(_st *nick);
 int builtin_alias(_st *nick);
 int builtin_env(_st *nick);
