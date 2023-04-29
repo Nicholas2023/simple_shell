@@ -1,20 +1,26 @@
 #include "alx.h"
 
+
 /**
- * builtin_exit - exit of the program with the status
- * @nick: struct for the program's data
- * Return: zero if sucess, or other number if its declared in the arguments
+ * builtin_exit - A func that quits the shell program
+ * @nick: A pointer to struct
+ * Return: 0 if successfull
+ *
  */
+
+
 int builtin_exit(_st *nick)
 {
 	int i;
 
 	if (nick->f[1] != NULL)
-	{/*if exists arg for exit, check if is a number*/
+	{
+		/*Check argument data type*/
 		for (i = 0; nick->f[1][i]; i++)
 			if ((nick->f[1][i] < '0' || nick->f[1][i] > '9')
 				&& nick->f[1][i] != '+')
-			{/*if is not a number*/
+			{
+				/*For non-numeric args*/
 				errno = 2;
 				return (2);
 			}
@@ -24,11 +30,15 @@ int builtin_exit(_st *nick)
 	exit(errno);
 }
 
+
 /**
- * builtin_cd - change the current directory
- * @nick: struct for the program's data
- * Return: zero if sucess, or other number if its declared in the arguments
+ * builtin_cd - A func that changes current dir
+ * @nick: A pointer to struct
+ * Return: 0 if successfull
+ *
  */
+
+
 int builtin_cd(_st *nick)
 {
 	char *dir_home = env_get_key("HOME", nick), *dir_old = NULL;
@@ -62,12 +72,16 @@ int builtin_cd(_st *nick)
 	return (0);
 }
 
+
 /**
- * set_work_directory - set the work directory
- * @nick: struct for the program's data
- * @new_dir: path to be set as work directory
- * Return: zero if sucess, or other number if its declared in the arguments
+ * set_work_directory - Sets PWD
+ * @nick: A pointer to struct
+ * @new_dir: A pointer to the path of new_dir
+ *
+ * Return: 0 if successfull
  */
+
+
 int set_work_directory(_st *nick, char *new_dir)
 {
 	char old_dir[128] = {0};
@@ -89,19 +103,21 @@ int set_work_directory(_st *nick, char *new_dir)
 	return (0);
 }
 
+
 /**
- * builtin_help - shows the environment where the shell runs
- * @nick: struct for the program's data
- * Return: zero if sucess, or other number if its declared in the arguments
+ * builtin_help - A func that displays env variables
+ * @nick: A pointer to struct
+ *
+ * Return: 0 if successfull
  */
+
+
 int builtin_help(_st *nick)
 {
 	int i, length = 0;
 	char *van[6] = {NULL};
 
 	van[0] = HELP_INFO_SEARCH;
-
-	/* validate args */
 	if (nick->f[1] == NULL)
 	{
 		_print(van[0] + 6);
@@ -128,27 +144,31 @@ int builtin_help(_st *nick)
 			return (1);
 		}
 	}
-	/*if there is no match, print error and return -1 */
 	errno = EINVAL;
 	perror(nick->c);
 	return (0);
 }
 
+
 /**
- * builtin_alias - add, remove or show aliases
- * @nick: struct for the program's data
- * Return: zero if sucess, or other number if its declared in the arguments
+ * builtin_alias - A func that sets aliases
+ * @nick: A pointer to struct
+ *
+ * Return: 0 for successfull code
  */
+
+
 int builtin_alias(_st *nick)
 {
 	int i = 0;
 
-	/* if there are no arguments, print all environment */
+	/*print env variables*/
 	if (nick->f[1] == NULL)
 		return (print_alias(nick, NULL));
 
 	while (nick->f[++i])
-	{/* if there are arguments, set or print each env variable*/
+	{
+		/*Set env variables*/
 		if (count_characters(nick->f[i], "="))
 			set_alias(nick->f[i], nick);
 		else
