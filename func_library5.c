@@ -1,10 +1,12 @@
 #include "alx.h"
 
 /**
- * free_recurrent_data - free the fields needed each loop
- * @nick: struct of the program's data
- * Return: Nothing
+ * free_recurrent_data - free fields needed at each loop
+ * @nick: a pointer to struct
+ *
+ * Return:(void)
  */
+
 void free_recurrent_data(_st *nick)
 {
 	if (nick->f)
@@ -20,9 +22,10 @@ void free_recurrent_data(_st *nick)
 }
 
 /**
- * free_all_data - free all field of the data
- * @nick: struct of the program's data
- * Return: Nothing
+ * free_all_data - free field of data
+ * @nick: a pointer to struct
+ *
+ * Return:(void)
  */
 void free_all_data(_st *nick)
 {
@@ -37,10 +40,10 @@ void free_all_data(_st *nick)
 }
 
 /**
- * free_array_of_pointers - frees each pointer of an array of pointers and the
- * array too
+ * free_array_of_pointers - free a pointer of an array
  * @array: array of pointers
- * Return: nothing
+ *
+ * Return: (void)
  */
 void free_array_of_pointers(char **array)
 {
