@@ -54,14 +54,14 @@ void var_exp(_st *nick)
 
 
 /**
- * expand_alias - A functionthat expands aliases
+ * alias_exp - A functionthat expands aliases
  * @nick: a pointer to struct
  *
  * Return: void
  */
 
 
-void expand_alias(_st *nick)
+void alias_exp(_st *nick)
 {
 	int i, j, was_expanded = 0;
 	char line[B_SIZ] = {0}, expansion[B_SIZ] = {'\0'}, *temp;
