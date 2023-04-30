@@ -42,14 +42,14 @@ int p_alias(_st *nick, char *alias)
 
 
 /**
- * get_alias - add or remove alias
+ * alias_get - add or remove alias
  * @nick: a pointer to struct.
  * @name: name of the  alias.
  *
  * Return: 0 if successfull.
  */
 
-char *get_alias(_st *nick, char *name)
+char *alias_get(_st *nick, char *name)
 {
 	int i, alias_length;
 
@@ -94,7 +94,7 @@ int set_alias(char *alias_string, _st *nick)
 			buffer[i] = alias_string[i];
 		else
 		{
-			temp = get_alias(nick, alias_string + i + 1);
+			temp = alias_get(nick, alias_string + i + 1);
 			break;
 		}
 

@@ -13,7 +13,7 @@ void _tok(_st *nick);
 int _execve(_st *nick);
 int blt_in_lst(_st *nick);
 int p_alias(_st *nick, char *alias);
-char *get_alias(_st *nick, char *alias);
+char *alias_get(_st *nick, char *alias);
 int set_alias(char *alias_string, _st *nick);
 char **tokenize_path(_st *nick);
 int find_program(_st *nick);

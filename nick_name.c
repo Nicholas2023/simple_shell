@@ -77,7 +77,7 @@ void alias_exp(_st *nick)
 			expansion[j] = line[i + j];
 		expansion[j] = '\0';
 
-		temp = get_alias(nick, expansion);
+		temp = alias_get(nick, expansion);
 		if (temp)
 		{
 			expansion[0] = '\0';
