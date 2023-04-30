@@ -25,7 +25,7 @@ int find_program(_st *nick)
 	if (!nick->f[0])
 		return (2);
 
-	directories = tokenize_path(nick);
+	directories = _tok(nick);
 
 	if (!directories || !directories[0])
 	{
@@ -53,13 +53,13 @@ int find_program(_st *nick)
 
 
 /**
- * tokenize_path - tokenize the path.
+ * _tok - tokenize the path.
  * @nick: a pointer to struct
  *
  * Return: array of the  path
  */
 
-char **tokenize_path(_st *nick)
+char **_tok(_st *nick)
 {
 	int i = 0;
 	int counter_directories = 2;

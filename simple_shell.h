@@ -9,7 +9,7 @@ int lgc_ops(char *array_commands[], int i, char array_operators[]);
 void var_exp(_st *nick);
 void alias_exp(_st *nick);
 int add_buf(char *buffer, char *str_to_add);
-void tokenize(_st *nick);
+void _tok(_st *nick);
 int execute(_st *nick);
 int blt_in_lst(_st *nick);
 int print_alias(_st *nick, char *alias);
