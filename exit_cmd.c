@@ -164,7 +164,7 @@ int blt_in_alias(_st *nick)
 
 	/*print env variables*/
 	if (nick->f[1] == NULL)
-		return (print_alias(nick, NULL));
+		return (p_alias(nick, NULL));
 
 	while (nick->f[++i])
 	{
@@ -172,7 +172,7 @@ int blt_in_alias(_st *nick)
 		if (count_characters(nick->f[i], "="))
 			set_alias(nick->f[i], nick);
 		else
-			print_alias(nick, nick->f[i]);
+			p_alias(nick, nick->f[i]);
 	}
 
 	return (0);

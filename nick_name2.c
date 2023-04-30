@@ -2,14 +2,14 @@
 
 
 /**
- * print_alias - add or remove alias
+ * p_alias - add or remove alias
  * @nick: a pointer to struct
  * @alias: name to  be printed
  *
  * Return: 0 if successfull
  */
 
-int print_alias(_st *nick, char *alias)
+int p_alias(_st *nick, char *alias)
 {
 	int i, j, alias_length;
 	char buffer[250] = {'\0'};
