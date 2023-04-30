@@ -1,14 +1,14 @@
 #include "alx.h"
 
 /**
- * expand_variables - A function that expands special characters
+ * var_exp - A function that expands special characters
  * @nick: a pointer to struct
  *
  * Return: void
  */
 
 
-void expand_variables(_st *nick)
+void var_exp(_st *nick)
 {
 	int i, j;
 	char line[B_SIZ] = {0}, expansion[B_SIZ] = {'\0'}, *temp;
