@@ -1,11 +1,11 @@
 #include "alx.h"
 
 /**
- * execute - executes a command.
+ * _execve - executes a command.
  * @nick: a pointer to struct
  * Return: 0 if successfull.
  */
-int execute(_st *nick)
+int _execve(_st *nick)
 {
 	int retval = 0, status;
 	pid_t pidd;

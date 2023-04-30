@@ -124,7 +124,7 @@ void muturi(char *prompt, _st *nick)
 			tokenize(nick);
 			if (nick->f[0])
 			{
-				error_code = execute(nick);
+				error_code = _execve(nick);
 				if (error_code != 0)
 					_print_error(error_code, nick);
 			}

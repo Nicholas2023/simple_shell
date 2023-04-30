@@ -10,7 +10,7 @@ void var_exp(_st *nick);
 void alias_exp(_st *nick);
 int add_buf(char *buffer, char *str_to_add);
 void _tok(_st *nick);
-int execute(_st *nick);
+int _execve(_st *nick);
 int blt_in_lst(_st *nick);
 int print_alias(_st *nick, char *alias);
 char *get_alias(_st *nick, char *alias);
