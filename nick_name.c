@@ -15,7 +15,7 @@ void var_exp(_st *nick)
 
 	if (nick->b == NULL)
 		return;
-	buffer_add(line, nick->b);
+	add_buf(line, nick->b);
 	for (i = 0; line[i]; i++)
 		if (line[i] == '#')
 			line[i--] = '\0';
@@ -23,15 +23,15 @@ void var_exp(_st *nick)
 		{
 			line[i] = '\0';
 			long_to_string(errno, expansion, 10);
-			buffer_add(line, expansion);
-			buffer_add(line, nick->b + i + 2);
+			add_buf(line, expansion);
+			add_buf(line, nick->b + i + 2);
 		}
 		else if (line[i] == '$' && line[i + 1] == '$')
 		{
 			line[i] = '\0';
 			long_to_string(getpid(), expansion, 10);
-			buffer_add(line, expansion);
-			buffer_add(line, nick->b + i + 2);
+			add_buf(line, expansion);
+			add_buf(line, nick->b + i + 2);
 		}
 		else if (line[i] == '$' && (line[i + 1] == ' ' || line[i + 1] == '\0'))
 			continue;
@@ -41,9 +41,9 @@ void var_exp(_st *nick)
 				expansion[j - 1] = line[i + j];
 			temp = env_get_key(expansion, nick);
 			line[i] = '\0', expansion[0] = '\0';
-			buffer_add(expansion, line + i + j);
-			temp ? buffer_add(line, temp) : 1;
-			buffer_add(line, expansion);
+			add_buf(expansion, line + i + j);
+			temp ? add_buf(line, temp) : 1;
+			add_buf(line, expansion);
 		}
 	if (!str_compare(nick->b, line, 0))
 	{
@@ -69,7 +69,7 @@ void alias_exp(_st *nick)
 	if (nick->b == NULL)
 		return;
 
-	buffer_add(line, nick->b);
+	add_buf(line, nick->b);
 
 	for (i = 0; line[i]; i++)
 	{
@@ -81,7 +81,7 @@ void alias_exp(_st *nick)
 		if (temp)
 		{
 			expansion[0] = '\0';
-			buffer_add(expansion, line + i + j);
+			add_buf(expansion, line + i + j);
 			line[i] = '\0';
 			buffer_add(line, temp);
 			line[str_length(line)] = '\0';

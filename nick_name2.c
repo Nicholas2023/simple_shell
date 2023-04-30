@@ -29,9 +29,9 @@ int print_alias(_st *nick, char *alias)
 						break;
 				}
 				buffer[j + 1] = '\0';
-				buffer_add(buffer, "'");
-				buffer_add(buffer, nick->h[i] + j + 1);
-				buffer_add(buffer, "'\n");
+				add_buf(buffer, "'");
+				add_buf(buffer, nick->h[i] + j + 1);
+				add_buf(buffer, "'\n");
 				_print(buffer);
 			}
 		}
@@ -110,8 +110,8 @@ int set_alias(char *alias_string, _st *nick)
 	/* add the alias */
 	if (temp)
 	{
-		buffer_add(buffer, "=");
-		buffer_add(buffer, temp);
+		add_buf(buffer, "=");
+		add_buf(buffer, temp);
 		nick->h[j] = str_duplicate(buffer);
 	}
 	else
