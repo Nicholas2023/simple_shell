@@ -119,7 +119,7 @@ void muturi(char *prompt, _st *nick)
 		}
 		if (string_len >= 1)
 		{
-			expand_alias(nick);
+			alias_exp(nick);
 			var_exp(nick);
 			_token(nick);
 			if (nick->f[0])

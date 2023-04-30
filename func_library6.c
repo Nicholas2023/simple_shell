@@ -50,7 +50,7 @@ int _getline(_st *nick)
 
 
 /**
-* check_logic_ops - Checks for && and || delimeters
+* lgc_ops - Checks for && and || delimeters
 * @array_commands: pointer array to user in command
 * @i: Character index of input data
 * @array_operators: A pointer array to the logical operatoers delimeter
@@ -59,7 +59,7 @@ int _getline(_st *nick)
 */
 
 
-int check_logic_ops(char *array_commands[], int i, char array_operators[])
+int lgc_ops(char *array_commands[], int i, char array_operators[])
 {
 	char *temp = NULL;
 	int j;

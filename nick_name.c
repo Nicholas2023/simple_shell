@@ -83,9 +83,9 @@ void alias_exp(_st *nick)
 			expansion[0] = '\0';
 			add_buf(expansion, line + i + j);
 			line[i] = '\0';
-			buffer_add(line, temp);
+			add_buf(line, temp);
 			line[str_length(line)] = '\0';
-			buffer_add(line, expansion);
+			add_buf(line, expansion);
 			was_expanded = 1;
 		}
 		break;
@@ -107,7 +107,7 @@ void alias_exp(_st *nick)
  */
 
 
-int buffer_add(char *buffer, char *str_to_add)
+int add_buf(char *buffer, char *str_to_add)
 {
 	int length, i;
 
