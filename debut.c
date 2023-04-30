@@ -17,7 +17,7 @@ int main(int argc, char *argv[], char *env[])
 	char *prompt = "";
 
 	kimba(nick, argc, argv, env);
-	signal(SIGINT, handle_ctrl_c);
+	signal(SIGINT, ctrl_c_hndl);
 	if (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO) && argc == 1)
 	{
 		/* Command prompt*/
@@ -30,11 +30,11 @@ int main(int argc, char *argv[], char *env[])
 }
 
 /**
- * handle_ctrl_c - A function that prints the CMD PROMPT
+ * ctrl_c_hndl - A function that prints the CMD PROMPT
  * @UNUSED: option of the prototype
  *
  */
-void handle_ctrl_c(int opr UNUSED)
+void ctrl_c_hndl(int opr UNUSED)
 {
 	_print("\n");
 	_print(COMMAND_PROMPT);
