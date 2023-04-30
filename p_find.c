@@ -3,13 +3,13 @@
 int check_file(char *full_path);
 
 /**
- * find_program - find path
+ * prog_fnd - find path
  * @nick: a pointer to struct.
  *
  * Return: 0 if successfull.
  */
 
-int find_program(_st *nick)
+int prog_fnd(_st *nick)
 {
 	int i = 0, ret_code = 0;
 	char **directories;

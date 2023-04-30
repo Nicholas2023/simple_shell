@@ -16,7 +16,7 @@ int p_alias(_st *nick, char *alias);
 char *alias_get(_st *nick, char *alias);
 int set_alias(char *alias_string, _st *nick);
 char **_tok(_st *nick);
-int find_program(_st *nick);
+int prog_fnd(_st *nick);
 
 
 #endif

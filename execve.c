@@ -14,7 +14,7 @@ int _execve(_st *nick)
 	if (retval != -1)
 		return (retval);
 
-	retval = find_program(nick);
+	retval = prog_fnd(nick);
 	if (retval)
 	{
 		return (retval);
