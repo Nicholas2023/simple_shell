@@ -5,7 +5,7 @@
 void kimba(_st *nick, int arc, char *argv[], char **env);
 void muturi(char *prompt, _st *nick);
 void ctrl_c_hndl(int opr UNUSED);
-int check_logic_ops(char *array_commands[], int i, char array_operators[]);
+int lgc_ops(char *array_commands[], int i, char array_operators[]);
 void expand_variables(_st *nick);
 void expand_alias(_st *nick);
 int buffer_add(char *buffer, char *str_to_add);
