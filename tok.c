@@ -1,14 +1,14 @@
 #include "alx.h"
 
 /**
- * tokenize - A func that splits strings using delimiter
+ * _token - A func that splits strings using delimiter
  * @nick: a pointer to struct
  *
  * Return: Tokens
  */
 
 
-void tokenize(_st *nick)
+void _token(_st *nick)
 {
 	char *delimiter = " \t";
 	int i, j, counter = 2, length;
