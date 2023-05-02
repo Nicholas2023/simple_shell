@@ -13,19 +13,28 @@
 
 int main(int argc, char *argv[], char *env[])
 {
-	_st data_struct = {NULL}, *nick = &data_struct;
+	/*Variable and structure declaration*/
+	_st file_stat = {NULL}, *nick = &file_stat;
 	char *prompt = "";
 
+	/*Initialize the file structure fields*/
 	kimba(nick, argc, argv, env);
+
+	/*Handle Ctrl+C*/
 	signal(SIGINT, ctrl_c_hndl);
+
+	/*Check if the program is connected to a terminal*/
 	if (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO) && argc == 1)
 	{
-		/* Command prompt*/
+		/*Command prompt*/
 		errno = 2;
 		prompt = COMMAND_PROMPT;
 	}
 	errno = 0;
+
+	/*Display prompt and process the user-input*/
 	muturi(prompt, nick);
+
 	return (0);
 }
 
@@ -34,8 +43,11 @@ int main(int argc, char *argv[], char *env[])
  * @UNUSED: option of the prototype
  *
  */
+
 void ctrl_c_hndl(int opr UNUSED)
 {
+	/*Do not exit, instead:*/
+	/*Display prompt when user-input is Ctrl+c*/
 	_print("\n");
 	_print(COMMAND_PROMPT);
 }
@@ -55,13 +67,13 @@ void kimba(_st *nick, int argc, char *argv[], char **env)
 {
 	int i = 0;
 
-	nick->a = argv[0];
-	nick->b = NULL;
-	nick->c = NULL;
-	nick->d = 0;
+	nick->a = argv[0];/*hsh*/
+	nick->b = NULL;/*Read user-input*/
+	nick->c = NULL;/*First cmd*/
+	nick->d = 0;/*Number of executed cmd*/
 
-	if (argc == 1)
-		nick->e = STDIN_FILENO;
+	if (argc == 1)/*hsh*/
+		nick->e = STDIN_FILENO;/*File descriptors*/
 	else
 	{
 		nick->e = open(argv[1], O_RDONLY);
@@ -74,11 +86,11 @@ void kimba(_st *nick, int argc, char *argv[], char **env)
 			exit(127);
 		}
 	}
-	nick->f = NULL;
-	nick->env = malloc(sizeof(char *) * 50);
+	nick->f = NULL;/*Tokenized input*/
+	nick->env = malloc(sizeof(char *) * 50);/*Pointer to env*/
 	if (env)
 	{
-		for (; env[i]; i++)
+		for (; env[i]; i++)/*Duplicate env var(path)*/
 		{
 			nick->env[i] = str_duplicate(env[i]);
 		}
@@ -89,14 +101,14 @@ void kimba(_st *nick, int argc, char *argv[], char **env)
 	nick->h = malloc(sizeof(char *) * 20);
 	for (i = 0; i < 20; i++)
 	{
-		nick->h[i] = NULL;
+		nick->h[i] = NULL;/*Pointer to aliases*/
 	}
 }
 
 
 
 /**
- * muturi - A func that prints CMD PROMPT infinitely
+ * muturi - A func that reads and execute user-input
  * @prompt: A pointer to Shell prompt
  * @nick: A pointer to struct
  *
@@ -105,30 +117,33 @@ void kimba(_st *nick, int argc, char *argv[], char **env)
 
 void muturi(char *prompt, _st *nick)
 {
+	/*Variable declaration*/
 	int error_code = 0, string_len = 0;
 
-	while (++(nick->d))
+	while (++(nick->d))/*Whenever executing*/
 	{
-		_print(prompt);
+		_print(prompt);/*Display prompt*/
+		/*Read user-input*/
 		error_code = string_len = _getline(nick);
 
-		if (error_code == EOF)
+		if (error_code == EOF)/*Check length of cmd*/
 		{
 			free_all_data(nick);
 			exit(errno);
 		}
-		if (string_len >= 1)
+		if (string_len >= 1)/*If cmd is in range*/
 		{
-			alias_exp(nick);
-			var_exp(nick);
-			_token(nick);
+			alias_exp(nick);/*Execute alias*/
+			var_exp(nick);/*Execute special char*/
+			_token(nick);/*Tokenize user-cmd*/
 			if (nick->f[0])
 			{
+				/*Execute user-cmd*/
 				error_code = _execve(nick);
 				if (error_code != 0)
 					_print_error(error_code, nick);
 			}
-			free_recurrent_data(nick);
+			free_recurrent_data(nick);/*free memory*/
 		}
 	}
 }
