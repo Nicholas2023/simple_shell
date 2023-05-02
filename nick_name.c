@@ -99,7 +99,7 @@ void alias_exp(_st *nick)
 
 
 /**
- * buffer_add - A function appends strings
+ * add_buf - A function appends strings
  * @buffer: A pointer to buffer
  * @str_to_add: string to append to buffer
  *

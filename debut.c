@@ -38,6 +38,7 @@ int main(int argc, char *argv[], char *env[])
 	return (0);
 }
 
+
 /**
  * ctrl_c_hndl - A function that prints the CMD PROMPT
  * @UNUSED: option of the prototype
