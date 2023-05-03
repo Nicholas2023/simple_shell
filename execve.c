@@ -7,15 +7,16 @@
  */
 int _execve(_st *nick)
 {
+	/*variable declaration*/
 	int retval = 0, status;
 	pid_t pidd;
 
 	retval = blt_in_lst(nick);
-	if (retval != -1)
+	if (retval != -1)/*checks if the cmd is a blt-in*/
 		return (retval);
 
 	retval = prog_fnd(nick);
-	if (retval)
+	if (retval)/*checks if cmd is execve file*/
 	{
 		return (retval);
 	}
@@ -37,7 +38,7 @@ int _execve(_st *nick)
 		}
 		else
 		{
-			/* wait, then exit status of the child */
+			/* wait then check exit status of the child */
 			wait(&status);
 			if (WIFEXITED(status))
 				errno = WEXITSTATUS(status);
